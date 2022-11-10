@@ -1,0 +1,1 @@
+A functional approach to Computer Science data structures in JavaScript

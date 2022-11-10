@@ -1,0 +1,11 @@
+{
+  "name": "structs",
+  "version": "0.1.0",
+  "description": "A functional approach to Computer Science data structures in JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Thiago Vitorino",
+  "license": "UNLICENSED"
+}

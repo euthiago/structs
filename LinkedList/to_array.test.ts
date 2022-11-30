@@ -1,4 +1,4 @@
-import add, { add_and_get } from "./add"
+import add from "./add"
 import to_array from "./to_array"
 
 describe("Linked List to_array operation", () => {

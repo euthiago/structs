@@ -1,10 +1,16 @@
 import type {Config} from '@jest/types'
 
 const config: Config.InitialOptions = {
-  verbose: true,
-  transform: {
-  	'^.+\\.tsx?$': 'ts-jest',
-  },
+	verbose: true,
+	preset: "ts-jest",
+	transform: {
+		'^.+\\.tsx?$': [
+			'ts-jest',
+			{
+				useESM: true,
+			}
+		]
+	},
 }
 
 export default config

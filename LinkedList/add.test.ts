@@ -1,5 +1,5 @@
-import add from "./add"
 import LLNode from "./LLNode"
+import add from "./add"
 
 describe("Linked List add operation", () => {
 
@@ -10,21 +10,21 @@ describe("Linked List add operation", () => {
 	it("Should produce a LLNode with val 1", () => {
 
 		root = add(1)
-		expect(root).not.toBeNull()
+		expect(root).not.toBeUndefined()
 		expect(root.val).toBe(1)
-		expect(root.next).toBeNull()
+		expect(root.next).toBeUndefined()
 
 	})
 
 	it("Should create a node at tail with value 2", () => {
 
 		cur = add(2, root)
-		expect(cur).not.toBeNull()
-		expect(root).not.toBeNull()
+		expect(cur).not.toBeUndefined()
+		expect(root).not.toBeUndefined()
 		expect(cur.val).toBe(2)
-		expect(root.val).toBe(1) 
+		expect(root.val).toBe(1)
 		expect(root.next).toEqual(cur) 
-		expect(cur.next).toBeNull()
+		expect(cur.next).toBeUndefined()
 
 	})
 
@@ -32,9 +32,9 @@ describe("Linked List add operation", () => {
 
 		let prev = cur
 		cur = add(3, cur)
-		expect(cur).not.toBeNull()
+		expect(cur).not.toBeUndefined()
 		expect(cur.val).toBe(3)
-		expect(cur.next).toBeNull()
+		expect(cur.next).toBeUndefined()
 		expect(prev.next).toEqual(cur)
 
 	})

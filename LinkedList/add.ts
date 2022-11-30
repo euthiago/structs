@@ -12,8 +12,8 @@ const add = ( val?:any, node?:LLNode ):LLNode => {
 	if(!node)
 		return LLNode(val)
 	let cur = node 
-	while(cur.next !== null)
-		cur = node
+	while(cur.next)
+		cur = cur.next
 	cur.next = LLNode(val)
 	return cur.next
 }

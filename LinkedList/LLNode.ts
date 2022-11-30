@@ -4,10 +4,10 @@
 */
 type LLNode = {
 	val?: any,
-	next?: LLNode | null
+	next?: LLNode
 }
 
-const LLNode = ( val:any=null, next:LLNode|null=null ):LLNode => 
+const LLNode = ( val?:any, next?:LLNode ):LLNode => 
 	({ val, next })
 
 export default LLNode

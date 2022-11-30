@@ -1,20 +1,30 @@
 import LLNode from "./LLNode"
 
-/*
-	Linked List Remove operation
-	From a given node, seeks the
-	a node with the passed val and 
-	remove it
-
-	__IMPORTAT__
-	Since setting node to undefined wont 
-	mutate its value outside the function,
-	for this version we should assign the
-	return of this function to a new var:
-	let result = remove( 'someval', someNode )
-*/
+/**
+ * remove function either returns a LLNode or undefined
+ */
 type RemoveResult = LLNode | undefined
 
+/**
+ * Seeks a node containing value 'val' and removes it
+ * from the Linked List
+ * Returns either undefined (if the list is now empty)
+ * or the head
+ * 
+ * IMPORTANT: we can't mutate the head to undefined from
+ * within the function, so it's recommended to assign
+ * the result of this function to a var like so:
+ * let list = remove("some_value", old_list)
+ * In this exemple, if old_list were just a single head node,
+ * the value of var 'old_list' would still be the same, but
+ * var 'list' would correctly be undefined
+ * If old_list had two nodes, then its new value would properly
+ * contain only one node if we found a node holding value 'some_value'
+ * 
+ * @param val 
+ * @param node 
+ * @returns RemoveResult
+ */
 const remove = ( val?:any, node?:LLNode ):RemoveResult => {
 	// no node, returns the undefined variant
 	if(!node) return
@@ -29,8 +39,6 @@ const remove = ( val?:any, node?:LLNode ):RemoveResult => {
 			cur.next = cur.next?.next
 			break
 		}
-		// ensure we have cur.next
-		if(!cur.next) break
 		// set cur to cur.next
 		cur = cur.next
 	}

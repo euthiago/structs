@@ -1,8 +1,6 @@
 import add from "./add"
 import LLNode from "./LLNode"
+import remove from "./remove"
 
-/*
-	Linked List data structure in functional Typescript
-*/
 export default LLNode
-export { add }
+export { add, remove }

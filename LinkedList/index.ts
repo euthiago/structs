@@ -1,6 +1,7 @@
-import add from "./add"
+import add, { add_and_get } from "./add"
 import LLNode from "./LLNode"
 import remove from "./remove"
 
+
 export default LLNode
-export { add, remove }
+export { add, add_and_get, remove }

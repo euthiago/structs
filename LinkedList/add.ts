@@ -20,4 +20,15 @@ const add = ( val?:any, node?:LLNode, returnsTail=false ):LLNode => {
 	return returnsTail ? cur.next : node
 }
 
+/**
+ * Syntax sugar for add("val", node, true)
+ * 
+ * @param val value to be added
+ * @param node any node of a Linked List
+ * @returns LLNode (Tail of our Linked List)
+ */
+const add_and_get = (val?:any, node?:LLNode) =>
+	add(val, node, true)
+
 export default add
+export { add_and_get }

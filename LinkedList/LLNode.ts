@@ -11,12 +11,11 @@ type LLNode = {
 /**
  * Our Linked List Node data structure
  * All operations happen based on this signature
- * Instead of bloating the prototype or properties
- * of the resulting object, this approach allows
- * you to choose which operations to add, thus making
- * the final bundle as minimal as possible
- * If you want to add and remove nodes, include just
- * the operations you need on demand
+ * This is the classical node that is often used
+ * as the Linked List data structure itself
+ * Following this module, we also have a compreensive
+ * list of operations for what Linked List Nodes
+ * are used for, such as add, remove and search
  * 
  * @param val holds any arbitrary value
  * @param next the node that follows this one

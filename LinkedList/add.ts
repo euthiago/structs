@@ -1,34 +1,17 @@
-import LLNode from "./LLNode"
+import LinkedList from "./LinkedList"
+import Node from "./Node"
+
 /**
  * Add Operation
- * Creates a new LLNode, if one is not passed
- * For faster insertion times, O(1), this
- * function can return the tail, otherwise,
- * returns the received LLNode 
+ * Creates a new node at the lists tail
  * @param val value to be added
- * @param node any node of a Linked List
- * @param returnsTail returns the tail LLNode after insertion
- * @returns LLNode
- */
-const add = ( val?:any, node?:LLNode, returnsTail=false ):LLNode => {
-	if(!node)
-		return LLNode(val)
-	let cur = node 
-	while(cur.next)
-		cur = cur.next
-	cur.next = LLNode(val)
-	return returnsTail ? cur.next : node
+ * @returns {LinkedList}
+*/
+const add = <T>(ll:LinkedList<T>, val?:T):LinkedList<T> => {
+	let node = Node(val)
+	if(!ll.head) ll.head = node
+	ll.tail = node
+	return ll
 }
 
-/**
- * Syntax sugar for add("val", node, true)
- * 
- * @param val value to be added
- * @param node any node of a Linked List
- * @returns LLNode (Tail of our Linked List)
- */
-const add_and_get = (val?:any, node?:LLNode) =>
-	add(val, node, true)
-
 export default add
-export { add_and_get }

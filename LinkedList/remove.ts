@@ -26,7 +26,6 @@ const remove = <T>(ll:LinkedList<T>, val?:T):LinkedList<T> => {
 			prev	= cur
 			cur 	= cur.next
 		}
-		console.log("aqui", prev, cur)
 		// if a node with value 'val' was found, remove it
 		if(cur && cur.val === val){
 			prev.next = cur.next
@@ -35,7 +34,7 @@ const remove = <T>(ll:LinkedList<T>, val?:T):LinkedList<T> => {
 			if(!prev.next)
 				ll.tail = prev
 		}
-			
+		
 	}
 	// returns the LinkedList
 	return ll

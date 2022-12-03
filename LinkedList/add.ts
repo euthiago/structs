@@ -9,8 +9,16 @@ import Node from "./Node"
 */
 const add = <T>(ll:LinkedList<T>, val?:T):LinkedList<T> => {
 	let node = Node(val)
-	if(!ll.head) ll.head = node
-	ll.tail = node
+	// no head
+	if(!ll.head){
+		ll.head = node
+		ll.tail = node
+	}else{
+		// no tail should be unreachable, but ts cannot know it
+		if(ll.tail)
+			ll.tail.next = node
+		ll.tail = node
+	}
 	return ll
 }
 

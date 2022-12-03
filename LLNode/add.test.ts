@@ -1,7 +1,7 @@
 import LLNode from "./LLNode"
 import add, { add_and_get } from "./add"
 
-describe("Linked List add operation", () => {
+describe("LLNode add operation", () => {
 
 	// initialization
 	let root:LLNode

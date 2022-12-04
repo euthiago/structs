@@ -1,9 +1,9 @@
-import LLNode from "./LLNode"
+import NodeLinkedList from "./NodeLinkedList"
 
 /**
- * remove function either returns a LLNode or undefined
+ * remove function either returns a NodeLinkedList or undefined
  */
-type RemoveResult = LLNode | undefined
+type RemoveResult = NodeLinkedList | undefined
 
 /**
  * Seeks a node containing value 'val' and removes it
@@ -25,12 +25,12 @@ type RemoveResult = LLNode | undefined
  * @param node 
  * @returns RemoveResult
  */
-const remove = ( val?:any, node?:LLNode ):RemoveResult => {
+const remove = ( val?:any, node?:NodeLinkedList ):RemoveResult => {
 	// no node, returns the undefined variant
 	if(!node) return
 	// we need a dummy head, specially in case
 	// the removed value belongs to the first node
-	let dummy = LLNode(undefined, node)
+	let dummy = NodeLinkedList(undefined, node)
 	// the current node
 	let cur = dummy 
 	// seek the node holding the val we want to remove

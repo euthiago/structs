@@ -1,12 +1,12 @@
-import LLNode from "./LLNode"
+import NodeLinkedList from "./NodeLinkedList"
 import add from "./add"
 import add_before from "./add_before"
 
 describe("Linked List add_before operation", () => {
 
 	// initialization
-	let root:LLNode
-	let node:LLNode
+	let root:NodeLinkedList
+	let node:NodeLinkedList
 
 	it("Should add a node before root", () => {
 

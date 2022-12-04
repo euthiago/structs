@@ -1,12 +1,12 @@
-import LLNode from "./LLNode"
+import NodeLinkedList from "./NodeLinkedList"
 import add_after from "./add_after"
 import add from "./add"
 
 describe("Linked List add_after operation", () => {
 
 	// initialization
-	let root:LLNode
-	let node:LLNode
+	let root:NodeLinkedList
+	let node:NodeLinkedList
 
 	it("Should add a node after head", () => {
 

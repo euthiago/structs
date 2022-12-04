@@ -1,31 +1,31 @@
-import LLNode from "./LLNode"
+import NodeLinkedList from "./NodeLinkedList"
 
 describe("Linked List Node", () => {
 
 	// initialization
-	let node:LLNode
+	let node:NodeLinkedList
 
-	it("Should produce a LLNode with undefined val and next", () => {
+	it("Should produce a NodeLinkedList with undefined val and next", () => {
 
-		node = LLNode()
+		node = NodeLinkedList()
 		expect(node).not.toBeUndefined()
 		expect(node.val).toBeUndefined()
 		expect(node.next).toBeUndefined()
 
 	})
 
-	it("Should produce a LLNode with defined val", () => {
+	it("Should produce a NodeLinkedList with defined val", () => {
 
-		node = LLNode(1)
+		node = NodeLinkedList(1)
 		expect(node).not.toBeUndefined()
 		expect(node.val).toBe(1)
 		expect(node.next).toBeUndefined()
 
 	})
 
-	it("Should produce a LLNode with defined next", () => {
+	it("Should produce a NodeLinkedList with defined next", () => {
 
-		node = LLNode(undefined, node)
+		node = NodeLinkedList(undefined, node)
 		expect(node).not.toBeUndefined()
 		expect(node.val).toBeUndefined()
 		expect(node.next).toBeDefined()
@@ -34,9 +34,9 @@ describe("Linked List Node", () => {
 
 	})
 
-	it("Should produce a LLNode with val and next node", () => {
+	it("Should produce a NodeLinkedList with val and next node", () => {
 
-		node = LLNode(2, node)
+		node = NodeLinkedList(2, node)
 		expect(node).not.toBeUndefined()
 		expect(node.val).toBe(2)
 		expect(node.next).toBeDefined()

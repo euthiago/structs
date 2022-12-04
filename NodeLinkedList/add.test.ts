@@ -1,13 +1,13 @@
-import LLNode from "./LLNode"
+import NodeLinkedList from "./NodeLinkedList"
 import add, { add_and_get } from "./add"
 
-describe("LLNode add operation", () => {
+describe("NodeLinkedList add operation", () => {
 
 	// initialization
-	let root:LLNode
-	let cur:LLNode
+	let root:NodeLinkedList
+	let cur:NodeLinkedList
 
-	it("Should produce a LLNode with val 1", () => {
+	it("Should produce a NodeLinkedList with val 1", () => {
 
 		root = add(1)
 		expect(root).toBeDefined()

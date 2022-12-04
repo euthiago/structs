@@ -1,11 +1,11 @@
 import add from "./add"
-import LLNode from "./LLNode"
+import NodeLinkedList from "./NodeLinkedList"
 import remove from "./remove"
 
 describe("Linked List remove operation", () => {
 
 	// initialization
-	let root:LLNode = LLNode(1)
+	let root:NodeLinkedList = NodeLinkedList(1)
 
 	it("Should return an undefined value", () => {
 		let cur = remove(1, root)

@@ -1,3 +1,5 @@
+import { Comparator } from "../Comparators/Comparator"
+import Eq from "../Comparators/Eq"
 import LinkedList from "./LinkedList"
 import Node from "./Node"
 
@@ -8,17 +10,23 @@ import Node from "./Node"
  * @param ammount the maximum number of nodes to be removed
  * @returns {LinkedList}
 */
-const remove_many = <T>(ll:LinkedList<T>, val?:T, ammount:number=1):LinkedList<T> => {
+const remove_many = <T>(ll:LinkedList<T>, val?:T, ammount:number=1, comparator?:Comparator<T>):LinkedList<T> => {
+
 	// no nodes to remove
 	if(!ll.head || ammount < 1) return ll
+
+	// choose the comparator
+	comparator ??= Eq
+
 	// using a dummy head, so head becomes
 	// just another node
-	let dummy 	= Node(undefined, ll.head)
+	let dummy 	= Node<T>(undefined, ll.head)
 	let prev 	= dummy 
 	let cur 	= dummy.next
 	while(ammount > 0 && cur){
+		
 		// if cur has value 'val', remove it
-		if(cur && cur.val === val){
+		if(cur && comparator(cur.val, val)){
 			// decrement ammount
 			ammount--
 			// removes the node
@@ -35,7 +43,7 @@ const remove_many = <T>(ll:LinkedList<T>, val?:T, ammount:number=1):LinkedList<T
 			cur = prev.next
 		}
 		// get the next node with value === val
-		while( ammount > 0 && cur && cur.val !== val ){
+		while( ammount > 0 && cur && !comparator(cur.val, val) ){
 			prev	= cur
 			cur 	= cur.next
 		}

@@ -1,4 +1,4 @@
-import LLNode from "./LLNode"
+import NodeLinkedList from "./NodeLinkedList"
 
 /**
  * Add After Operation
@@ -8,11 +8,11 @@ import LLNode from "./LLNode"
  * the subsequent nodes are moved after the new node
  * @param val value to be added
  * @param node any node of a Linked List
- * @returns LLNode the new node added
+ * @returns NodeLinkedList the new node added
  */
-const add_after = ( val:any, node:LLNode ):LLNode => {
+const add_after = ( val:any, node:NodeLinkedList ):NodeLinkedList => {
 	let { next } = node 
-	node.next = LLNode(val, next)
+	node.next = NodeLinkedList(val, next)
 	return node.next
 }
 

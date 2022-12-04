@@ -1,4 +1,4 @@
-import LLNode from "./LLNode"
+import NodeLinkedList from "./NodeLinkedList"
 
 /**
  * To Array Operation
@@ -8,7 +8,7 @@ import LLNode from "./LLNode"
  * @param node any node of a Linked List
  * @returns Array<any>
  */
-const to_array = ( node:LLNode ):Array<any> => {
+const to_array = ( node:NodeLinkedList ):Array<any> => {
 	let otp:Array<any> = []
 	if(!node) return otp
 	while(node){

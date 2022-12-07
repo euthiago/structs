@@ -1,11 +1,3 @@
-// import add from "../NodeLinkedList/add"
-// import add_after from "../NodeLinkedList/add_after"
-// import from_array from "../NodeLinkedList/from_array"
-// import NodeLinkedList from "../NodeLinkedList/NodeLinkedList"
-// import remove from "../NodeLinkedList/remove"
-// import search from "../NodeLinkedList/search"
-// import to_array from "../NodeLinkedList/to_array"
-
 import { Node } from "./Node"
 
 /**

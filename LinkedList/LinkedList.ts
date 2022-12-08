@@ -27,14 +27,33 @@ type LinkedList<T> = {
 	 * Efficient way of removing many nodes from the list.
 	 * Can be used with a Custom Comparator 
 	 * to remove elements that match an arbitrary condition
-	 * @param {T} val value of the node to be removed
+	 * @param {T} val value of the nodes to be removed
 	 * @param {number} ammount the maximum number of nodes to be removed (defaults to 1)
 	 * @param {Comparator} comparator Function that accepts a value of a node and returns true if it is to be removed
 	 * @returns {LinkedList} returns the LinkedList
 	*/
 	remove_many: (val?:T, ammount?:number, comparator?:Comparator<T>) => LinkedList<T>,
+	/**
+	 * Remove Operation
+	 * Removes the first node holding value 'val'
+	 * You may choose a custom comparator if Equality
+	 * is not what you need to choose which node to remove
+	 * @param {T} val value of the node to be removed
+	 * @param {Comparator} comparator  Function that accepts a value of a node and returns true if it is to be removed
+	 * @returns {LinkedList} returns the LinkedList
+	*/
+	remove: (val?:T, comparator?:Comparator<T>) => LinkedList<T>,
+	/**
+	 * Remove All Operation
+	 * Removes all nodes that have value val
+	 * You may choose a custom comparator if Equality
+	 * is not what you need to choose which nodes to remove
+	 * @param {T} val value of the nodes to be removed
+	 * @param {Comparator} comparator  Function that accepts a value of a node and returns true if it is to be removed
+	 * @returns {LinkedList} returns the LinkedList
+	*/
+	remove_all: (val?:T, comparator?:Comparator<T>) => LinkedList<T>,
 }
-
 
 /**
  * LinkedList 
@@ -112,11 +131,19 @@ const LinkedList = <T>():LinkedList<T> => {
 		return returnLinkedList()
 	}
 
+	const remove = (val?:T, comparator?:Comparator<T>):LinkedList<T> => 
+		remove_many(val, 1, comparator)
+
+	const remove_all = (val?:T, comparator?:Comparator<T>):LinkedList<T> => 
+		remove_many(val, Number.POSITIVE_INFINITY, comparator)
+	
 	const returnLinkedList = () => ({
 		head,
 		tail,
 		add,
 		remove_many,
+		remove,
+		remove_all
 	})
 	
 	return returnLinkedList()

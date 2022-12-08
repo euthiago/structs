@@ -7,11 +7,11 @@ type LinkedListNode<T> = {
 	/**
 	 * The value this current node is holding
 	 */
-	val: () => Option<T>,
+	val: Option<T>,
 	/**
 	 * The next Node on our list
 	 */
-	next: () => Option<LinkedListNode<T>>
+	next: Option<LinkedListNode<T>>
 }
 
 /**
@@ -21,8 +21,7 @@ type LinkedListNode<T> = {
  * @returns {LinkedListNode}
  */
 const LinkedListNode = <T>(val?:T, next?:LinkedListNode<T>):LinkedListNode<T> => ({
-	val: () => val, 
-	next: () => next
+	val, next
 })
 
 export default LinkedListNode

@@ -10,11 +10,11 @@ type LinkedList<T> = {
 	/**
 	 * Reads first node of our list
 	 */
-	head: () => Option<LinkedListNode<T>>,
+	head: Option<LinkedListNode<T>>,
 	/**
 	 * Reads the node of our list
 	 */
-	tail: () => Option<LinkedListNode<T>>,
+	tail: Option<LinkedListNode<T>>,
 	/**
 	 * Add Operation
 	 * Creates a new node at the lists tail
@@ -49,81 +49,69 @@ type LinkedList<T> = {
  */
 const LinkedList = <T>():LinkedList<T> => {
 
-	let _head:Option<LinkedListNode<T>>
-	let _tail:Option<LinkedListNode<T>>
-
-	const head = () => _head
-	const tail = () => _tail
+	let head:Option<LinkedListNode<T>>
+	let tail:Option<LinkedListNode<T>>
 
 	const add = (val?:T):LinkedList<T> => {
 		
 		let node = LinkedListNode(val)
-		if(!_head){
-			_head = node
-			_tail = node
+		if(!head){
+			head = node
+			tail = node
 		}else{
-			// undefined tail should be unreachable, but ts cannot know it
-			if(_tail)
-				_tail = LinkedListNode(_tail.val(), node)
-			_tail = node
+			if(tail) tail.next = node
+			tail = node
 		}
 		return returnLinkedList()
 	
 	}
 
-
-	/**
-	 * Remove Operation
-	 * Removes the first *n* nodes that have value 'val'
-	 * @param val value of the node to be removed
-	 * @param ammount the maximum number of nodes to be removed
-	 * @returns {LinkedList}
-	*/
 	const remove_many = (val?:T, ammount:number=1, comparator:Comparator<T>=Eq):LinkedList<T> => {
 
 		// no nodes to remove
-		if(!head() || ammount < 1) return returnLinkedList()
+		if(!head || ammount < 1) return returnLinkedList()
 
 		// using a dummy head, so head becomes
 		// just another node
-		let dummy 	= LinkedListNode(undefined, head())
+		let dummy 	= LinkedListNode(undefined, head)
 		let prev 	= dummy 
-		let cur 	= dummy.next()
+		let cur 	= dummy.next
 		while(ammount > 0 && cur){
 			
 			// if cur has value 'val', remove it
-			if(cur && comparator(cur.val(), val)){
+			if(cur && comparator(cur.val, val)){
 				// decrement ammount
 				ammount--
 				// removes the node
-				prev = LinkedListNode(prev.val(), cur.next())
+				prev.next = cur.next
 				// if the node was the tail,
 				// then prev becomes the tail
 				// stops the ammount loop
-				if(!prev.next()){
-					_tail = prev
+				if(!prev.next){
+					tail = prev
 					break
 				}
 				// for ammounts > 0
 				// set cur to the next non checked node
-				cur = prev.next()
+				cur = prev.next
 			}
 			// get the next node with value === val
-			while( ammount > 0 && cur && !comparator(cur.val(), val) ){
+			while( ammount > 0 && cur && !comparator(cur.val, val) ){
 				prev	= cur
-				cur 	= cur.next()
+				cur 	= cur.next
 			}
 		}
 		// moving back the head
-		_head = dummy.next()
+		head = dummy.next
 		// if only one node, tail is that node
 		// this scenario is reached when all nodes
 		// have the same value and we remove them
-		if(!_head?.next())
-			_tail = _head
+		if(!head?.next)
+			tail = head
 		// returns the LinkedList
 		return returnLinkedList()
 	}
+
 	const returnLinkedList = () => ({
 		head,
 		tail,

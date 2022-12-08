@@ -72,4 +72,24 @@ describe("Linked List", () => {
 		
 	})
 
+	it("Creates a list from an Array", () => {
+
+		let arr = [1,2,3]
+		let q = Queue(arr)
+		expect(q.size()).toBe(3)
+		expect(q.front()).toBe(1)
+		expect(q.rear()).toBe(3)
+		
+	})
+
+	it("Creates a list from the helper builder", () => {
+
+		let arr = [1,2,3]
+		let q = Queue.fromArray(arr)
+		expect(q.size()).toBe(3)
+		expect(q.front()).toBe(1)
+		expect(q.rear()).toBe(3)
+		
+	})
+
 })

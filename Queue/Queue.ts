@@ -1,57 +1,48 @@
 import { Option } from "../SharedTypes/Option"
 
-/**
- * Returns the number of elements in this Queue
- */
-type Size = () => number 
 
-/**
- * Returns, but does not remove, the front element
- */
-type Front<T> = () => T
-
-/**
- * Returns, but does not remove, the rear Elemment
- */
-type Rear<T> = () => T
-
-/**
- * Adds an element to the end of our Qeue
- * @param val The element to be added
- * @returns {Queue} the Queue
- */
-type Enqueue<T> = (val:T) => Queue<T> 
-
-/**
- * Removes an element from the front of the Queue
- * @returns {T} the dequeued element
- */
-type Dequeue<T> = () => Option<T> 
-
-/**
- * Returns an array listing all elements
- * present in the Queue in order
- * @returns {T[]} Array containing the elements of this Queue
- */
- type ToArray<T> = () => T[]
-
-/**
- * A First In First Out Queue
- */
 type Queue<T> = {
-	front: Front<T>,
-	rear: Rear<T>,
-	size: Size,
-	enqueue: Enqueue<T>
-	dequeue: Dequeue<T>
-	to_array: ToArray<T>
+	/**
+	* Returns, but does not remove, the front element
+	*/
+	front: () => T,
+	/**
+	* Returns, but does not remove, the rear Elemment
+	*/
+	rear: () => T,
+	/**
+	* Returns the number of elements in this Queue
+	*/
+	size: () => number,
+	/**
+	* Adds an element to the end of our Qeue
+	* @param val The element to be added
+	* @returns {Queue} the Queue
+	*/
+	enqueue: (val:T) => Queue<T>,
+	/**
+	 * Removes an element from the front of the Queue
+	 * @returns {Option<T>} the element or undefined, if empty
+	 */
+	dequeue: () => Option<T>,
+	/**
+	 * Returns an array listing all elements
+	 * present in the Queue in order
+	 * @returns {T[]} Array containing the elements of this Queue
+	 */
+	to_array: () => T[],
 }
+/**
+ * A First In First Out data structure
+ * @param arr optional list of elements to populate the Queue
+ * @returns {Queue} the newly created Queue
+ */
+const Queue = <T>(arr?:T[]):Queue<T> => {
 
-const Queue = <T>():Queue<T> => {
-
-	const data 	= Array<T>()
+	// support for array initialization
+	const data 	= arr ? arr.slice() : Array<T>()
 	let idx_f  	= 0
-	let idx_r	= 0
+	let idx_r	= data.length
 
 	const size 	= () => idx_r-idx_f
 	const front = () => data[idx_f]
@@ -76,9 +67,6 @@ const Queue = <T>():Queue<T> => {
 	const to_array = ():T[] => 
 		data.slice(0)
 	
-	const from_array = ():T[] => 
-		data.slice(0)
-	
 	const returnQueue = ():Queue<T> => ({
 		size,
 		front,
@@ -92,5 +80,13 @@ const Queue = <T>():Queue<T> => {
 
 }
 
+/**
+ * Created a Queue from an Array
+ * First element of the Array will
+ * be the first element of the Queue
+ * @param arr The input array
+ * @returns {Queue} a new Queue
+ */
+Queue.fromArray = <T>(arr?:T[]):Queue<T> => Queue(arr)
 
 export default Queue

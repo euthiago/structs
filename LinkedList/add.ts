@@ -1,5 +1,5 @@
 import LinkedList from "./LinkedList"
-import Node from "./Node"
+import Node from "./LinkedListNode"
 
 /**
  * Add Operation

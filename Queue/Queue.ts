@@ -15,7 +15,12 @@ type Queue<T> = {
 	*/
 	size: () => number,
 	/**
-	* Adds an element to the end of our Qeue
+	* Checks whether the Queue is empty or not
+	* @returns {boolean} true if empty, false otherwise
+	*/
+	is_empty: () => boolean,
+	/**
+	* Adds an element to the end of our Queue
 	* @param val The element to be added
 	* @returns {Queue} the Queue
 	*/
@@ -44,9 +49,10 @@ const Queue = <T>(arr?:T[]):Queue<T> => {
 	let idx_f  	= 0
 	let idx_r	= data.length
 
-	const size 	= () => idx_r-idx_f
-	const front = () => data[idx_f]
-	const rear	= () => data[idx_r-1]
+	const size 		= () => idx_r-idx_f
+	const is_empty 	= () => idx_r === idx_f
+	const front 	= () => data[idx_f]
+	const rear		= () => data[idx_r-1]
 
 	const enqueue = (val:T):Queue<T> => {
 		data[idx_r] = val
@@ -69,6 +75,7 @@ const Queue = <T>(arr?:T[]):Queue<T> => {
 	
 	const returnQueue = ():Queue<T> => ({
 		size,
+		is_empty,
 		front,
 		rear,
 		enqueue,

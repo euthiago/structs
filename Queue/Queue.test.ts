@@ -54,6 +54,12 @@ describe("Linked List", () => {
 		
 	})
 
+	it("Non empty Queue is_empty() should return false", () => {
+
+		expect(q.is_empty()).toBe(false)
+		
+	})
+
 	it("Removes the last element", () => {
 
 		expect(q.dequeue()).toBe(2)
@@ -63,6 +69,12 @@ describe("Linked List", () => {
 		
 	})
 	
+	it("Empty Queue is_empty() should return true", () => {
+
+		expect(q.is_empty())
+		
+	})
+
 	it("Attempt to remove from empty list", () => {
 
 		expect(q.dequeue()).toBe(undefined)

@@ -2,15 +2,6 @@ import { Comparator } from "../Comparators/Comparator"
 import Le from "../Comparators/Le"
 import { Option } from "../SharedTypes/Option"
 
-
-/**
- * Heap Data Structure
- * A complete binary tree that satisfies the Heap Invariant
- * The Heap Invatiant, or heap property, is satisfied if
- * all children nodes have smaller keys then their parents,
- * or all children nodes have larger keys then their parents.
- * Respectively, those form MaxHeaps and MinHeaps.
- */
 type Heap<T> = {
 	/**
 	 * Total number of nodes of this Heap
@@ -45,7 +36,22 @@ type Heap<T> = {
 	// __TODO__ peekLast?
 }
 
-
+/**
+ * Heap Data Structure
+ * A complete binary tree that satisfies the Heap Invariant
+ * Tipically, the Heap Invatiant, or heap property, is satisfied
+ * if all children nodes have smaller keys then their parents,
+ * or all children nodes have larger keys then their parents.
+ * Respectively, those form MaxHeaps and MinHeaps.
+ * This particular Heap implementation allows custom comparators.
+ * **Less Then or Equals** is used for MinHeap
+ * **Greater Then or Equals** is used for MaxHeap
+ * Should you find another useful comparator for type T,
+ * you might create your own custom Heap easily by passing
+ * as the second argument
+ * @param {Array<T>} arr initial values to populate our Heap
+ * @param {Comparator<T>} comparator By default Less Then or Equals is used. Making this a MinHeap
+ */
 const Heap = <T>(arr?:Array<T>, comparator:Comparator<T>=Le):Heap<T> => {
 
 	// initialize with a copy of an array or a new array of T

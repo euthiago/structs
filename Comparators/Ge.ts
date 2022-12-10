@@ -8,7 +8,7 @@ import { Comparator } from "./Comparator"
  * @param rhs right hand side element that will be compared
  * @returns {boolean}
  */
-const Gt:Comparator<any> = (lhs:any, rhs:any):boolean =>  
+const Ge:Comparator<any> = (lhs:any, rhs:any):boolean =>  
 	lhs >= rhs
 
-export default Gt
+export default Ge

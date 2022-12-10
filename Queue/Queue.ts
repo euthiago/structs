@@ -16,7 +16,6 @@ type Queue<T> = {
 	size: () => number,
 	/**
 	* Checks whether the Queue is empty or not
-	* @returns {boolean} true if empty, false otherwise
 	*/
 	is_empty: () => boolean,
 	/**
@@ -63,7 +62,7 @@ const Queue = <T>(arr?:T[]):Queue<T> => {
 	const dequeue = ():Option<T> => {
 		let el:Option<T>
 		if(idx_f < idx_r){
-			el = data[idx_f] as Option<T>
+			el = data[idx_f]
 			delete data[idx_f]
 			idx_f++
 		}

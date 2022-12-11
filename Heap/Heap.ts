@@ -225,13 +225,9 @@ const Heap = <T>(arr?:Array<T>, comparator:Comparator<T>=Le):Heap<T> => {
 
 	}
 
-	
-	if(size > 0) console.log(data)
 	// if we initilized with a non empty array
 	// heapify down to build our first valid Heap
 	if(size > 0) heapifyDown()
-
-	if(size > 0) console.log(data)
 
 	const returnHeap = () => ({
 		size,

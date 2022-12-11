@@ -1,61 +1,19 @@
-import Heap from "./Heap"
+import MinHeap from "./MinHeap"
 
-describe("Heap", () => {
+describe("MinHeap", () => {
 
-	let h:Heap<number>
-	it("Creates a Heap", () => {
+	let h:MinHeap<number>
+	it("Creates a MinHeap", () => {
 
-		h = Heap()
+		h = MinHeap()
 		expect(h.size).toBe(0)
 		expect(h.add).toBeInstanceOf(Function)
 
 	})
 
-	it("peek: Peeking empty Heap should return undefined", () => {
-		expect(h.peek()).toBeUndefined()
-	})
-	
 
-	it("add: Inserts an element", () => {
-		let old = h
-		h = h.add(5)
-		expect(h.size).toBe(1)
-		expect(old.size).toBe(0)
-	})
-	
-	it("peek: Shows the first element, but does not remove it", () => {
-		expect(h.peek()).toBe(5)
-		expect(h.size).toBe(1)
-	})
-	
-	it("add: Inserts two elements respecting the  default heap invariation (min heap)", () => {
-		h = h.add(4)
-		h = h.add(10)
-		expect(h.size).toBe(3)
-	})
-
-	it("peek: Peeks deeper then the front element", () => {
-		expect(h.peek(0)).toBe(4)
-		expect(h.peek(1)).toBe(5)
-		expect(h.peek(2)).toBe(10)
-	})
-
-	it("remove: Removes an element from the end of the Heap", () => {
-		h = h.remove(10)
-		expect(h.size).toBe(2)
-		expect(h.peek(0)).toBe(4)
-		expect(h.peek(1)).toBe(5)
-		expect(h.peek(2)).toBe(undefined)
-	})
-
-	it("remove: Removes an element from the front of the Heap", () => {
-		h = h.remove(4)
-		expect(h.size).toBe(1)
-		expect(h.peek(0)).toBe(5)
-	})
-
-	it("A new Heap can be created from an unsorted array", () => {
-		h = Heap([10,5,2,3,11,4,20])
+	it("A new MinHeapHeap can be created from an unsorted array", () => {
+		h = MinHeap([10,5,2,3,11,4,20])
 		expect(h.size).toBe(7)
 		expect(h.peek(0)).toBe(2)
 		expect(h.peek(1)).toBe(3)
@@ -66,8 +24,8 @@ describe("Heap", () => {
 		expect(h.peek(6)).toBe(20)
 	})
 	
-	it("A new Heap can be created from an unsorted array (2)", () => {
-		h = Heap([0, 100, 50, 25, 10, 200, 12, 11, 10, 1000, 2000, 10, 10, ])
+	it("A new MinHeapHeap can be created from an unsorted array (2)", () => {
+		h = MinHeap([0, 100, 50, 25, 10, 200, 12, 11, 10, 1000, 2000, 10, 10, ])
 		expect(h.size).toBe(13)
 		expect(h.peek(0)).toBe(0)
 		expect(h.peek(1)).toBe(10)

@@ -262,15 +262,18 @@ const Heap = <T>(arr?:Array<T>, comparator:Comparator<T>=Le):Heap<T> => {
 
 	const to_array = () => [...data]
 
+	// there might be faster ways
+	// of producing this sorted
+	// array, either using native sort
+	// or checking the node values one
+	// by one for O(n) in time
 	const to_sorted_array = () => {
 
 		let otp = Array<T>()
-
 		while(size > 0){
 			otp.push(peek())
 			extract()
 		}
-
 		return otp
 
 	}

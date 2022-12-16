@@ -45,15 +45,20 @@ type Heap<T> = {
 	extract: () => Heap<T>
 
 	/**
-	 * Returns a copy of the Heap as an Array
+	 * Returns the Heap as an Array
 	 */
 	to_array: () => Array<T>
 
+	/**
+	 *  Returns the Heap as a Sorted Array
+	 *  in O(n*log(n)) time
+	 */
+	to_sorted_array: () => Array<T>
 	// __TODO__ peek multiple?
 	// __TODO__ remove multiple?
 	// __TODO__ pop?
-	// __TODO__ extract/shift?
 	// __TODO__ peekLast?
+
 }
 
 /**
@@ -257,6 +262,19 @@ const Heap = <T>(arr?:Array<T>, comparator:Comparator<T>=Le):Heap<T> => {
 
 	const to_array = () => [...data]
 
+	const to_sorted_array = () => {
+
+		let otp = Array<T>()
+
+		while(size > 0){
+			otp.push(peek())
+			extract()
+		}
+
+		return otp
+
+	}
+
 	const returnHeap = ():Heap<T> => ({
 		size,
 		add,
@@ -264,6 +282,7 @@ const Heap = <T>(arr?:Array<T>, comparator:Comparator<T>=Le):Heap<T> => {
 		remove,
 		extract,
 		to_array,
+		to_sorted_array,
 	})
 
 	return returnHeap()

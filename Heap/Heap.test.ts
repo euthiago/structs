@@ -105,6 +105,21 @@ describe("Heap", () => {
 		h = h.extract();
 		expect(h.size).toBe(12);
 		expect(h.to_array()).toEqual(expected);
+		
 	});
+	
+	it("to_sorted_array: Extracts a value from the Heap", () => {
+		/*	
+			We should really benchmark this
+			agains just sorting a copy of the original array
+			Nevertheless its a neat trick and we can keep it for now
+		*/
+		let expected = [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 ]
+		h = Heap([...expected].reverse())
+		expect(h.size).toBe(expected.length);
+		expect(h.to_sorted_array()).toEqual(expected);
+		
+	});
+	
 
 });

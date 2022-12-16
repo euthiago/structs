@@ -84,14 +84,27 @@ describe("Heap", () => {
 		expect(h.peek(12)).toBe(50)
 	})
 	
-	it("Extracts a value from the Heap", () => {
-		h = h.extract()
-		expect(h.size).toBe(12)
-		console.log(h.peek(0))
-		console.log(h.peek(1))
-		console.log(h.peek(2))
-		console.log(h.peek(3))
-		expect(h.peek(11)).toBe(50)
-		expect(h.peek()).toBe(10)
+
+	it("to_array: Returns the Heap as an Array", () => {
+		h = Heap([0, 100, 50, 25, 10, 200, 12, 11, 10, 1000, 2000, 10, 10, ])
+		let expected = [
+			0,   10,   10,  11,
+		   10,   10,   12, 100,
+		   25, 1000, 2000, 200,
+		   50
+		 ]
+		expect(h.to_array()).toEqual(expected)
 	})
-})
+	
+	it("extract: Extracts a value from the Heap", () => {
+		let expected = [
+			10,   10,   10,  11,
+			50,   10,   12, 100,
+			25, 1000, 2000, 200
+		  ]
+		h = h.extract();
+		expect(h.size).toBe(12);
+		expect(h.to_array()).toEqual(expected);
+	});
+
+});

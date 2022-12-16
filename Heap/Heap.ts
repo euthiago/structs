@@ -44,6 +44,11 @@ type Heap<T> = {
 	 */
 	extract: () => Heap<T>
 
+	/**
+	 * Returns a copy of the Heap as an Array
+	 */
+	to_array: () => Array<T>
+
 	// __TODO__ peek multiple?
 	// __TODO__ remove multiple?
 	// __TODO__ pop?
@@ -117,12 +122,13 @@ const Heap = <T>(arr?:Array<T>, comparator:Comparator<T>=Le):Heap<T> => {
 	 * and its children, otherwise swap them
 	 * and keep moving down
 	 */
-	const heapifyDown = () => {
+	const heapifyDown = (from:number=0) => {
 
-		// temp idexes stack
+		// temp indexes stack
 		let nodes = Array
 			.from({ length:Math.floor(size/2) })
 			.map((_, idx) => idx)
+			.filter( idx => idx >= from )
 
 		// while we have indexes to validate the heap property
 		while(nodes.length > 0){
@@ -191,7 +197,6 @@ const Heap = <T>(arr?:Array<T>, comparator:Comparator<T>=Le):Heap<T> => {
 	const seekIndex = (val:T):number => data.indexOf(val)
 
 	const add = (val:T) => {
-
 		// Adds the node to the end of our heap
 		// which is located at the end of our
 		// data array as well
@@ -211,7 +216,6 @@ const Heap = <T>(arr?:Array<T>, comparator:Comparator<T>=Le):Heap<T> => {
 	// last index and heapify up
 	const _remove_by_index = (index:number=0):Heap<T> => {
 
-		console.log(data)
 		// idx might be -1 if no node had that value
 		if(index > -1){
 			// if only one node remains, then just remove it
@@ -229,13 +233,12 @@ const Heap = <T>(arr?:Array<T>, comparator:Comparator<T>=Le):Heap<T> => {
 				// removes the element
 				data.pop()
 				// heapify up
-				heapifyUp()
+				heapifyDown()
 			}
 			// decrease the size
 			size--
 		}
 
-		console.log(data)
 		// returns the new Heap
 		return returnHeap()
 
@@ -252,12 +255,15 @@ const Heap = <T>(arr?:Array<T>, comparator:Comparator<T>=Le):Heap<T> => {
 	// heapify down to build our first valid Heap
 	if(size > 0) heapifyDown()
 
+	const to_array = () => [...data]
+
 	const returnHeap = ():Heap<T> => ({
 		size,
 		add,
 		peek,
 		remove,
 		extract,
+		to_array,
 	})
 
 	return returnHeap()

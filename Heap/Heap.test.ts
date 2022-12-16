@@ -83,4 +83,15 @@ describe("Heap", () => {
 		expect(h.peek(11)).toBe(200)
 		expect(h.peek(12)).toBe(50)
 	})
+	
+	it("Extracts a value from the Heap", () => {
+		h = h.extract()
+		expect(h.size).toBe(12)
+		console.log(h.peek(0))
+		console.log(h.peek(1))
+		console.log(h.peek(2))
+		console.log(h.peek(3))
+		expect(h.peek(11)).toBe(50)
+		expect(h.peek()).toBe(10)
+	})
 })

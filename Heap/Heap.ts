@@ -7,27 +7,42 @@ type Heap<T> = {
 	 * Total number of nodes of this Heap
 	 */
 	size: number
+
 	/**
 	 * Inserts an element in our Heap
 	 * @param {T} val the value to be inserted in our Heap
 	 * @returns {Heap<T>} the Heap
 	 */
 	add: (val:T) => Heap<T>
+
 	/**
 	 * Shows the first element in our Heap
 	 * Does not remove it from the Heap
-	 * Might be undefined if size === 0
-	 * @param {number} index choose the index to peek into (defaults to zero)
+	 * You may choose to peek at another index, 
+	 * other then the first (0)
+	 * Might be undefined if size is 0 or
+	 * the chosen index is larger then the size 
+	 * @param {number} index choose another index to peek into (defaults to zero)
 	 * @returns {Option<T>} value of the first element
 	 */
 	peek: (index?:number) => Option<T>
+
 	/**
-	 * Removes the first node containing value **val**
+	 * Shows the value in the Heaps front
 	 * keeping the Heap valid afterwards
 	 * @param {T} val the value of the node we wish to remove 
 	 * @returns {Heap<T>} the new Heap after the node removal
 	 */
 	remove: (val:T) => Heap<T>
+
+	/**
+	 * Returns the Heap after removing its front element
+	 * IMPORTANT: To maintain scope isolation and chainability
+	 * this returns the new Heap instead of the extracted value
+	 * You can access the front value using peek()
+	 * @returns {Heap<T>} the Heap
+	 */
+	extract: () => Heap<T>
 
 	// __TODO__ peek multiple?
 	// __TODO__ remove multiple?
@@ -191,14 +206,14 @@ const Heap = <T>(arr?:Array<T>, comparator:Comparator<T>=Le):Heap<T> => {
 
 	const peek = (index:number=0) => data[index]
 
-	const remove = (val:T) => {
+	// To remove a node in our Heap,
+	// find its index, swap it with the
+	// last index and heapify up
+	const _remove_by_index = (index:number=0):Heap<T> => {
 
-		// To remove a node in our Heap,
-		// find its index, swap it with the
-		// last index and heapify up
-		let idx = seekIndex(val)
+		console.log(data)
 		// idx might be -1 if no node had that value
-		if(idx > -1){
+		if(index > -1){
 			// if only one node remains, then just remove it
 			if(size === 1){
 				size = 0
@@ -206,11 +221,11 @@ const Heap = <T>(arr?:Array<T>, comparator:Comparator<T>=Le):Heap<T> => {
 				return returnHeap()
 			}
 			// node is the last element
-			if(idx === size-1){
+			if(index === size-1){
 				data.pop()
 			}else{
 				// swap the values
-				swap(idx, size-1)
+				swap(index, size-1)
 				// removes the element
 				data.pop()
 				// heapify up
@@ -220,20 +235,29 @@ const Heap = <T>(arr?:Array<T>, comparator:Comparator<T>=Le):Heap<T> => {
 			size--
 		}
 
+		console.log(data)
 		// returns the new Heap
 		return returnHeap()
 
 	}
 
+	const remove = (val:T)  => 
+		_remove_by_index(seekIndex(val))
+
+	const extract = ()  =>
+		_remove_by_index()
+	
+
 	// if we initilized with a non empty array
 	// heapify down to build our first valid Heap
 	if(size > 0) heapifyDown()
 
-	const returnHeap = () => ({
+	const returnHeap = ():Heap<T> => ({
 		size,
 		add,
 		peek,
 		remove,
+		extract,
 	})
 
 	return returnHeap()

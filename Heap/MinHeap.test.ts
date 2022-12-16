@@ -41,4 +41,12 @@ describe("MinHeap", () => {
 		expect(h.peek(11)).toBe(200)
 		expect(h.peek(12)).toBe(50)
 	})
+
+	it("to_sorted_array: Works on MinHeap", () => {
+		let expected = [ 1,2,3,4,5 ]
+		h = MinHeap([...expected].reverse())
+		expect(h.size).toBe(expected.length);
+		expect(h.to_sorted_array()).toEqual(expected);
+		
+	});
 })

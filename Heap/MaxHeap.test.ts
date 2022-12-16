@@ -40,4 +40,13 @@ describe("MaxHeap", () => {
 		expect(h.peek(11)).toBe(10)
 		expect(h.peek(12)).toBe(10)
 	})
+
+
+	it("to_sorted_array: Works on MaxHeap", () => {
+		let expected = [ 5, 4, 3, 2, 1 ]
+		h = MaxHeap([...expected].reverse())
+		expect(h.size).toBe(expected.length);
+		expect(h.to_sorted_array()).toEqual(expected);
+		
+	});
 })

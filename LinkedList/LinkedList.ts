@@ -1,25 +1,23 @@
 import { Comparator } from "../Comparators/Comparator"
 import Eq from "../Comparators/Eq"
-import { Option } from "../SharedTypes/Option"
 import LinkedListNode from "./LinkedListNode"
 
 /**
  * A LinkedList 
  */
-type LinkedList<T> = {
+export type LinkedList<T> = {
 	/**
 	 * Reads first node of our list
 	 */
-	head: Option<LinkedListNode<T>>,
+	head?: LinkedListNode<T>,
 	/**
 	 * Reads the node of our list
 	 */
-	tail: Option<LinkedListNode<T>>,
+	tail?: LinkedListNode<T>,
 	/**
 	 * Add Operation
 	 * Creates a new node at the lists tail
 	 * @param {T} val a value the new Node will hold
-	 * @returns {LinkedList} the LinkedList
 	*/
 	add: (val?:T) => LinkedList<T>,
 	/**
@@ -30,9 +28,8 @@ type LinkedList<T> = {
 	 * @param {T} val value of the nodes to be removed
 	 * @param {number} ammount the maximum number of nodes to be removed (defaults to 1)
 	 * @param {Comparator} comparator Function that accepts a value of a node and returns true if it is to be removed
-	 * @returns {LinkedList} returns the LinkedList
 	*/
-	remove_many: (val?:T, ammount?:number, comparator?:Comparator<T>) => LinkedList<T>,
+	removeMany: (val?:T, ammount?:number, comparator?:Comparator<T>) => LinkedList<T>,
 	/**
 	 * Remove Operation
 	 * Removes the first node holding value 'val'
@@ -40,7 +37,6 @@ type LinkedList<T> = {
 	 * is not what you need to choose which node to remove
 	 * @param {T} val value of the node to be removed
 	 * @param {Comparator} comparator  Function that accepts a value of a node and returns true if it is to be removed
-	 * @returns {LinkedList} returns the LinkedList
 	*/
 	remove: (val?:T, comparator?:Comparator<T>) => LinkedList<T>,
 	/**
@@ -50,26 +46,47 @@ type LinkedList<T> = {
 	 * is not what you need to choose which nodes to remove
 	 * @param {T} val value of the nodes to be removed
 	 * @param {Comparator} comparator  Function that accepts a value of a node and returns true if it is to be removed
-	 * @returns {LinkedList} returns the LinkedList
 	*/
-	remove_all: (val?:T, comparator?:Comparator<T>) => LinkedList<T>,
+	removeAll: (val?:T, comparator?:Comparator<T>) => LinkedList<T>,
 }
 
 /**
- * LinkedList 
+ * LinkedList options
+ * 
+ */
+export type LinkedListOptions = {
+	/**
+	 * Makes this structure immutable
+	 * 
+	 * Notice the difference:
+	 * const ll = LinkedList<number>()
+	 * ll.add(1) // ll.head === 1
+	 *
+	 * const ll_immut = LinkedList<number>(true)
+	 * const ll2 = ll.add(1) // ll.head === undefined && ll2.head === 1
+	 * 
+	 * @default false
+	 */
+	immutable?: boolean
+}
+
+/**
+ *  LinkedList 
  * This implementation has an internal reference to its
  * tail, allowing constant time insertions.
  * Removing nodes from head also happens in constant time,
  * unless you want to remove all occurrences, of course,
  * This makes this structure useful for simple First In First Out (FIFO)
  * applications, such as simple Queue-like usages.
- * @returns {LinkedList}
- * 
  */
-const LinkedList = <T>():LinkedList<T> => {
+const createLinkedList = <T>(options?:LinkedListOptions):LinkedList<T> => {
 
-	let head:Option<LinkedListNode<T>>
-	let tail:Option<LinkedListNode<T>>
+	// default values
+	const { immutable=false } = options || {}
+
+	let instance:LinkedList<T> | undefined
+	let head:LinkedListNode<T> | undefined
+	let tail:LinkedListNode<T> | undefined
 
 	const add = (val?:T):LinkedList<T> => {
 		
@@ -85,7 +102,7 @@ const LinkedList = <T>():LinkedList<T> => {
 	
 	}
 
-	const remove_many = (val?:T, ammount:number=1, comparator:Comparator<T>=Eq):LinkedList<T> => {
+	const removeMany = (val?:T, ammount:number=1, comparator:Comparator<T>=Eq):LinkedList<T> => {
 
 		// no nodes to remove
 		if(!head || ammount < 1) return returnLinkedList()
@@ -132,21 +149,41 @@ const LinkedList = <T>():LinkedList<T> => {
 	}
 
 	const remove = (val?:T, comparator?:Comparator<T>):LinkedList<T> => 
-		remove_many(val, 1, comparator)
+		removeMany(val, 1, comparator)
 
-	const remove_all = (val?:T, comparator?:Comparator<T>):LinkedList<T> => 
-		remove_many(val, Number.POSITIVE_INFINITY, comparator)
+	const removeAll = (val?:T, comparator?:Comparator<T>):LinkedList<T> => 
+		removeMany(val, Number.POSITIVE_INFINITY, comparator)
 	
-	const returnLinkedList = () => ({
-		head,
-		tail,
-		add,
-		remove_many,
-		remove,
-		remove_all
-	})
+	/**
+	 * Returns the LinkedList
+	 * either mutably or immutably
+	 */
+	const returnLinkedList = ():LinkedList<T> => {
+		
+		/**
+		 * First time returning and immutability support
+		 */
+		if( !instance || immutable ){
+			// new assignment
+			instance = {
+				head,
+				tail,
+				add,
+				remove,
+				removeAll,
+				removeMany
+			}
+			return instance
+		}
+
+		instance.head = head
+		instance.tail = tail
+
+		return instance
 	
+	}
+
 	return returnLinkedList()
 }
 
-export default LinkedList
+export default createLinkedList

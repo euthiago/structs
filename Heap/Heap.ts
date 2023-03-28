@@ -1,6 +1,5 @@
 import { Comparator } from "../Comparators/Comparator"
 import Le from "../Comparators/Le"
-import { Option } from "../SharedTypes/Option"
 
 type Heap<T> = {
 	/**
@@ -25,7 +24,7 @@ type Heap<T> = {
 	 * @param {number} index choose another index to peek into (defaults to zero)
 	 * @returns {Option<T>} value of the first element
 	 */
-	peek: (index?:number) => Option<T>
+	peek: (index?:number) => T | undefined
 
 	/**
 	 * Shows the value in the Heaps front

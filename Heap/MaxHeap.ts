@@ -1,7 +1,8 @@
 import Ge from "../Comparators/Ge"
-import Heap from "./Heap"
+import createHeap, { Heap, HeapOptions } from "./Heap"
 
-type MaxHeap<T> = Heap<T>
+export type MaxHeap<T> = Heap<T>
+export type MaxHeapOptions<T> =  Omit<HeapOptions<T>, "comparator">
 
 /**
  * MaxHeap Data Structure
@@ -10,7 +11,8 @@ type MaxHeap<T> = Heap<T>
  * Equivalent to Heap using Ge comparator
  * @param {Array<T>} arr initial values to populate our Heap
  */
-const MaxHeap = <T>(arr?:Array<T>):Heap<T> => 
-	Heap(arr, Ge)
 
-export default MaxHeap
+const createMaxHeap = <T>(arr?:Array<T>, options?:MaxHeapOptions<T> ):Heap<T> => 
+	createHeap(arr, { comparator:Ge, ...options })
+
+export default createMaxHeap

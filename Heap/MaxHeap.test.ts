@@ -1,11 +1,11 @@
-import MaxHeap from "./MaxHeap"
+import createMaxHeap, { MaxHeap } from "./MaxHeap"
 
 describe("MaxHeap", () => {
 
 	let h:MaxHeap<number>
 	it("Creates a MaxHeap", () => {
 
-		h = MaxHeap()
+		h = createMaxHeap()
 		expect(h.size).toBe(0)
 		expect(h.add).toBeInstanceOf(Function)
 
@@ -13,7 +13,7 @@ describe("MaxHeap", () => {
 
 
 	it("A new MaxHeapHeap can be created from an unsorted array", () => {
-		h = MaxHeap([10,5,2,3,11,4,20])
+		h = createMaxHeap([10,5,2,3,11,4,20])
 		expect(h.size).toBe(7)
 		expect(h.peek(0)).toBe(20)
 		expect(h.peek(1)).toBe(11)
@@ -24,7 +24,7 @@ describe("MaxHeap", () => {
 		expect(h.peek(6)).toBe(2)
 	})
 	it("A new MaxHeapHeap can be created from an unsorted array (2)", () => {
-		h = MaxHeap([0, 100, 50, 25, 10, 200, 12, 11, 10, 1000, 2000, 10, 10, ])
+		h = createMaxHeap([0, 100, 50, 25, 10, 200, 12, 11, 10, 1000, 2000, 10, 10, ])
 		expect(h.size).toBe(13)
 		expect(h.peek(0)).toBe(2000)
 		expect(h.peek(1)).toBe(1000)
@@ -42,11 +42,11 @@ describe("MaxHeap", () => {
 	})
 
 
-	it("to_sorted_array: Works on MaxHeap", () => {
+	it("toSortedArray: Works on MaxHeap", () => {
 		let expected = [ 5, 4, 3, 2, 1 ]
-		h = MaxHeap([...expected].reverse())
+		h = createMaxHeap([...expected].reverse())
 		expect(h.size).toBe(expected.length);
-		expect(h.to_sorted_array()).toEqual(expected);
+		expect(h.toSortedArray()).toEqual(expected);
 		
 	});
 })

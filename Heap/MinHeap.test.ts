@@ -1,11 +1,11 @@
-import MinHeap from "./MinHeap"
+import createMinHeap, { MinHeap } from "./MinHeap"
 
 describe("MinHeap", () => {
 
 	let h:MinHeap<number>
 	it("Creates a MinHeap", () => {
 
-		h = MinHeap()
+		h = createMinHeap()
 		expect(h.size).toBe(0)
 		expect(h.add).toBeInstanceOf(Function)
 
@@ -13,7 +13,7 @@ describe("MinHeap", () => {
 
 
 	it("A new MinHeapHeap can be created from an unsorted array", () => {
-		h = MinHeap([10,5,2,3,11,4,20])
+		h = createMinHeap([10,5,2,3,11,4,20])
 		expect(h.size).toBe(7)
 		expect(h.peek(0)).toBe(2)
 		expect(h.peek(1)).toBe(3)
@@ -25,7 +25,7 @@ describe("MinHeap", () => {
 	})
 	
 	it("A new MinHeapHeap can be created from an unsorted array (2)", () => {
-		h = MinHeap([0, 100, 50, 25, 10, 200, 12, 11, 10, 1000, 2000, 10, 10, ])
+		h = createMinHeap([0, 100, 50, 25, 10, 200, 12, 11, 10, 1000, 2000, 10, 10, ])
 		expect(h.size).toBe(13)
 		expect(h.peek(0)).toBe(0)
 		expect(h.peek(1)).toBe(10)
@@ -42,11 +42,11 @@ describe("MinHeap", () => {
 		expect(h.peek(12)).toBe(50)
 	})
 
-	it("to_sorted_array: Works on MinHeap", () => {
+	it("toSortedArray: Works on MinHeap", () => {
 		let expected = [ 1,2,3,4,5 ]
-		h = MinHeap([...expected].reverse())
+		h = createMinHeap([...expected].reverse())
 		expect(h.size).toBe(expected.length);
-		expect(h.to_sorted_array()).toEqual(expected);
+		expect(h.toSortedArray()).toEqual(expected);
 		
 	});
 })

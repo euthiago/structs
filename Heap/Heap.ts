@@ -1,7 +1,8 @@
 import { Comparator } from "../Comparators/Comparator"
 import Le from "../Comparators/Le"
 
-type Heap<T> = {
+
+export type Heap<T> = {
 	/**
 	 * Total number of nodes of this Heap
 	 */
@@ -46,13 +47,13 @@ type Heap<T> = {
 	/**
 	 * Returns the Heap as an Array
 	 */
-	to_array: () => Array<T>
+	toArray: () => Array<T>
 
 	/**
 	 *  Returns the Heap as a Sorted Array
 	 *  in O(n*log(n)) time
 	 */
-	to_sorted_array: () => Array<T>
+	toSortedArray: () => Array<T>
 	// __TODO__ peek multiple?
 	// __TODO__ remove multiple?
 	// __TODO__ pop?
@@ -61,7 +62,25 @@ type Heap<T> = {
 }
 
 /**
- * Heap Data Structure
+ * Heap Options
+ */
+export type HeapOptions<T> = {
+	/**
+	 * The comparator function. 
+	 * Defaults to Less Than or Equals.
+	 */
+	comparator?: Comparator<T>,
+	/**
+	 * Internal props become immutable
+	 * EX: const h = createHeap<number>()	// h.size === 0
+	 * const i = h.add(1) // h.size === 0 && i.size === 1
+	 * 
+	 */
+	immutable?: boolean
+}
+
+/**
+ * Creates a Heap Data Structure
  * A complete binary tree that satisfies the Heap Invariant
  * Tipically, the Heap Invatiant, or heap property, is satisfied
  * if all children nodes have smaller keys then their parents,
@@ -76,11 +95,14 @@ type Heap<T> = {
  * @param {Array<T>} arr initial values to populate our Heap
  * @param {Comparator<T>} comparator By default Less Then or Equals is used. Making this a MinHeap
  */
-const Heap = <T>(arr?:Array<T>, comparator:Comparator<T>=Le):Heap<T> => {
+const createHeap = <T>(arr?:Array<T>, options?:HeapOptions<T> ):Heap<T> => {
+
+	const { comparator=Le, immutable=false } = options || {}
 
 	// initialize with a copy of an array or a new array of T
 	// IMPORTANT: non empty arrays will trigger a heapifyDown
 	// before the return of this building call
+	let instance: Heap<T> | undefined
 	let data = arr ? [...arr] : Array<T>()
 	let size = data.length
 
@@ -218,7 +240,7 @@ const Heap = <T>(arr?:Array<T>, comparator:Comparator<T>=Le):Heap<T> => {
 	// To remove a node in our Heap,
 	// find its index, swap it with the
 	// last index and heapify up
-	const _remove_by_index = (index:number=0):Heap<T> => {
+	const _removeByIndex = (index:number=0):Heap<T> => {
 
 		// idx might be -1 if no node had that value
 		if(index > -1){
@@ -249,24 +271,24 @@ const Heap = <T>(arr?:Array<T>, comparator:Comparator<T>=Le):Heap<T> => {
 	}
 
 	const remove = (val:T)  => 
-		_remove_by_index(seekIndex(val))
+		_removeByIndex(seekIndex(val))
 
 	const extract = ()  =>
-		_remove_by_index()
+		_removeByIndex()
 	
 
 	// if we initilized with a non empty array
 	// heapify down to build our first valid Heap
 	if(size > 0) heapifyDown()
 
-	const to_array = () => [...data]
+	const toArray = () => [...data]
 
 	// there might be faster ways
 	// of producing this sorted
 	// array, either using native sort
 	// or checking the node values one
 	// by one for O(n) in time
-	const to_sorted_array = () => {
+	const toSortedArray = () => {
 
 		let otp = Array<T>()
 		while(size > 0){
@@ -277,19 +299,35 @@ const Heap = <T>(arr?:Array<T>, comparator:Comparator<T>=Le):Heap<T> => {
 
 	}
 
-	const returnHeap = ():Heap<T> => ({
-		size,
-		add,
-		peek,
-		remove,
-		extract,
-		to_array,
-		to_sorted_array,
-	})
+	const returnHeap = ():Heap<T> => {
+	
+		// first usage and immutability support
+		if( !instance || immutable ) {
+
+			instance = {
+				size,
+				add,
+				peek,
+				remove,
+				extract,
+				toArray,
+				toSortedArray,
+			}
+
+			return instance
+
+		}
+
+		// mutable override
+		instance.size = size
+
+		return instance
+		
+	}
 
 	return returnHeap()
 
 }
 
 
-export default Heap
+export default createHeap

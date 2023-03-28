@@ -1,7 +1,5 @@
-import { Option } from "../SharedTypes/Option"
 
-
-type Queue<T> = {
+export type Queue<T> = {
 	/**
 	* Returns, but does not remove, the front element
 	*/
@@ -17,7 +15,7 @@ type Queue<T> = {
 	/**
 	* Checks whether the Queue is empty or not
 	*/
-	is_empty: () => boolean,
+	isEmpty: () => boolean,
 	/**
 	* Adds an element to the end of our Queue
 	* @param val The element to be added
@@ -26,22 +24,19 @@ type Queue<T> = {
 	enqueue: (val:T) => Queue<T>,
 	/**
 	 * Removes an element from the front of the Queue
-	 * @returns {Option<T>} the element or undefined, if empty
 	 */
-	dequeue: () => Option<T>,
+	dequeue: () => T | undefined,
 	/**
 	 * Returns an array listing all elements
 	 * present in the Queue in order
-	 * @returns {T[]} Array containing the elements of this Queue
 	 */
-	to_array: () => T[],
+	toArray: () => T[],
 }
 /**
  * A First In First Out data structure
  * @param arr optional list of elements to populate the Queue
- * @returns {Queue} the newly created Queue
  */
-const Queue = <T>(arr?:T[]):Queue<T> => {
+const createQueue = <T>(arr?:T[]):Queue<T> => {
 
 	// support for array initialization
 	const data 	= arr ? arr.slice() : Array<T>()
@@ -49,7 +44,7 @@ const Queue = <T>(arr?:T[]):Queue<T> => {
 	let idx_r	= data.length
 
 	const size 		= () => idx_r-idx_f
-	const is_empty 	= () => idx_r === idx_f
+	const isEmpty 	= () => idx_r === idx_f
 	const front 	= () => data[idx_f]
 	const rear		= () => data[idx_r-1]
 
@@ -59,8 +54,8 @@ const Queue = <T>(arr?:T[]):Queue<T> => {
 		return returnQueue()
 	} 
 
-	const dequeue = ():Option<T> => {
-		let el:Option<T>
+	const dequeue = ():T | undefined => {
+		let el:T | undefined
 		if(idx_f < idx_r){
 			el = data[idx_f]
 			delete data[idx_f]
@@ -69,17 +64,17 @@ const Queue = <T>(arr?:T[]):Queue<T> => {
 		return el
 	}
 
-	const to_array = ():T[] => 
+	const toArray = ():T[] => 
 		data.slice(0)
 	
 	const returnQueue = ():Queue<T> => ({
 		size,
-		is_empty,
+		isEmpty,
 		front,
 		rear,
 		enqueue,
 		dequeue,
-		to_array
+		toArray
 	})
 
 	return returnQueue()
@@ -93,6 +88,6 @@ const Queue = <T>(arr?:T[]):Queue<T> => {
  * @param arr The input array
  * @returns {Queue} a new Queue
  */
-Queue.fromArray = <T>(arr?:T[]):Queue<T> => Queue(arr)
+export const fromArray = <T>(arr?:T[]):Queue<T> => createQueue(arr)
 
-export default Queue
+export default createQueue

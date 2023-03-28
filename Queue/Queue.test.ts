@@ -1,8 +1,8 @@
-import Queue from "./Queue"
+import createQueue, { fromArray, Queue } from "./Queue"
 
 describe("Linked List", () => {
 
-	let q:Queue<number> = Queue()
+	let q:Queue<number> = createQueue()
 		
 	it("Should produce a Queue", () => {
 
@@ -18,7 +18,7 @@ describe("Linked List", () => {
 
 	})
 
-	it("Adds an element", () => {
+	it("enqueue: Adds an element", () => {
 
 		q.enqueue(1)
 		expect(q.size()).toBe(1)
@@ -27,7 +27,7 @@ describe("Linked List", () => {
 		
 	})
 
-	it("Adds a second element", () => {
+	it("enqueue: Adds a second element", () => {
 
 		q.enqueue(2)
 		expect(q.size()).toBe(2)
@@ -36,16 +36,16 @@ describe("Linked List", () => {
 		
 	})
 
-	it("Creates an Array containing all elements of the Queue", () => {
+	it("toArray: Creates an Array containing all elements of the Queue", () => {
 
-		let a = q.to_array()
+		let a = q.toArray()
 		expect(a.length).toBe(2)
 		expect(a[0]).toBe(1)
 		expect(a[1]).toBe(2)
 		
 	})
 
-	it("Removes an element", () => {
+	it("dequeue: Removes an element", () => {
 
 		expect(q.dequeue()).toBe(1)
 		expect(q.size()).toBe(1)
@@ -54,13 +54,13 @@ describe("Linked List", () => {
 		
 	})
 
-	it("Non empty Queue is_empty() should return false", () => {
+	it("isEmpty: Non empty Queue isEmpty() should return false", () => {
 
-		expect(q.is_empty()).toBe(false)
+		expect(q.isEmpty()).toBe(false)
 		
 	})
 
-	it("Removes the last element", () => {
+	it("dequeue: Removes the last element", () => {
 
 		expect(q.dequeue()).toBe(2)
 		expect(q.size()).toBe(0)
@@ -69,13 +69,13 @@ describe("Linked List", () => {
 		
 	})
 	
-	it("Empty Queue is_empty() should return true", () => {
+	it("isEmpty: Empty Queue isEmpty() should return true", () => {
 
-		expect(q.is_empty())
+		expect(q.isEmpty())
 		
 	})
 
-	it("Attempt to remove from empty list", () => {
+	it("dequeue: Attempt to remove from empty list", () => {
 
 		expect(q.dequeue()).toBe(undefined)
 		expect(q.size()).toBe(0)
@@ -87,7 +87,7 @@ describe("Linked List", () => {
 	it("Creates a list from an Array", () => {
 
 		let arr = [1,2,3]
-		let q = Queue(arr)
+		let q = createQueue(arr)
 		expect(q.size()).toBe(3)
 		expect(q.front()).toBe(1)
 		expect(q.rear()).toBe(3)
@@ -97,7 +97,7 @@ describe("Linked List", () => {
 	it("Creates a list from the helper builder", () => {
 
 		let arr = [1,2,3]
-		let q = Queue.fromArray(arr)
+		let q = fromArray(arr)
 		expect(q.size()).toBe(3)
 		expect(q.front()).toBe(1)
 		expect(q.rear()).toBe(3)

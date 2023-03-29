@@ -29,7 +29,15 @@ export type Trie = {
 	/**
 	 * Checks if a particular key is present
 	 */
-	has: (key:string) => boolean
+	has: (key:string) => boolean,
+	/**
+	 * Given a prefix, returns an array containing
+	 * keys that share that prefix 
+	 * @param {string} prefix the prefix to search with
+	 * @param {number} maxResults returns at max this ammount of keys
+	 */
+	find: (prefix:string, maxResults?:number) => string[],
+
 }
 
 export type TrieOptions = {
@@ -252,9 +260,41 @@ const createTrie = (arr?:string[], options?:TrieOptions):Trie => {
 			node = (node.keys.get(c) as TrieNode)
 		}
 
-		console.log("has:", key, node)
 		return node.isEndOfKey
 
+	}
+
+	const find = (prefix="", maxResults=10) => {
+
+		// user does not want any result
+		if(maxResults < 1) return []
+
+		// starting from the root TrieNode
+		let node = root
+
+		// making sure the whole prefix is present first
+		for(const c of prefix) {
+
+			// return early if the prefix is not present in our Trie
+			if(!node.keys.has(c)) return []
+
+			// current TS needs to be informed this IS a TrieNode
+			node = (node.keys.get(c) as TrieNode)
+
+		}
+
+		// initializing the results array
+		const results:string[] = []
+
+		// the current node might just be the first result
+		if(node.isEndOfKey) results.push(prefix)
+		
+		// storing the ammout of results found for quick usage
+		let resultsFound = results.length
+
+		// __TODO__ I had to stop coding at this point for the moment
+
+		return results
 	}
 
 	const returnTrie = ():Trie => {
@@ -266,7 +306,8 @@ const createTrie = (arr?:string[], options?:TrieOptions):Trie => {
 				isEmpty,
 				insert,
 				remove,
-				has
+				has,
+				find
 			}
 			return instance
 		}

@@ -26,6 +26,10 @@ export type Trie = {
 	* Checks whether the Trie is empty or not
 	*/
 	isEmpty: () => boolean,
+	/**
+	 * Checks if a particular key is present
+	 */
+	has: (key:string) => boolean
 }
 
 export type TrieOptions = {
@@ -228,6 +232,30 @@ const createTrie = (arr?:string[], options?:TrieOptions):Trie => {
 
 	const isEmpty = () => size === 0
 
+	/**
+	 * Traverse the TrieNodes matching
+	 * the key string, returning early
+	 * if a character is not present
+	 * Return true only if the whole
+	 * key is present and the TrieNode
+	 * for its last character is marked
+	 * as isEndOfKey
+	 */
+	const has = (key:string) => {
+
+		let node = root
+		for( const c of key ) {
+			if(!node.keys.has(c))
+				return false
+			// once again forcing current TS to
+			// understand the previous guard clause
+			node = (node.keys.get(c) as TrieNode)
+		}
+
+		console.log("has:", key, node)
+		return node.isEndOfKey
+
+	}
 
 	const returnTrie = ():Trie => {
 
@@ -237,7 +265,8 @@ const createTrie = (arr?:string[], options?:TrieOptions):Trie => {
 				size,
 				isEmpty,
 				insert,
-				remove
+				remove,
+				has
 			}
 			return instance
 		}
@@ -246,6 +275,15 @@ const createTrie = (arr?:string[], options?:TrieOptions):Trie => {
 		return instance
 
 	}
+
+
+	/**
+	 * 
+	 * Initialization with array of keys
+	 * Pretty elegant :)
+	 * 
+	 */
+	if(arr) arr.map(insert)
 
 	return returnTrie()
 

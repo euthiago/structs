@@ -23,22 +23,27 @@ const createTrieNode = (isEndOfKey:boolean=false):TrieNode => {
 
 	const insert = (key:string, isEndOfKey:boolean = false):TrieNode => {
 
-		// string ends at this point, just change 
-		if(isEndOfKey && !instance.isEndOfKey)
-			instance.isEndOfKey = true
+		let node:TrieNode
 
-		// we do have this key, just return the instance
-		if(keys.has(key)) 
-			return instance
+		// do we have a TrieNode for this key?
+		if(keys.has(key)) {
 
-		// a new key is being inserted, creates a new node
-		const newTrieNode = createTrieNode(isEndOfKey)
+			// current TS is forcing the the following 'as' statement
+			node = (keys.get(key) as TrieNode)
+			// we may mark the node as end of a key of applicable
+			if(isEndOfKey) 
+				node.isEndOfKey = true
 
-		// current node now points to the new node for this key
-		keys.set(key, newTrieNode)
-		
-		// returns the new node
-		return newTrieNode
+		}else{
+
+			// a new key is being inserted, creates a new node
+			node = createTrieNode(isEndOfKey)
+			keys.set(key, node)
+
+		}
+
+		// returns the node
+		return node
 		
 	}
 

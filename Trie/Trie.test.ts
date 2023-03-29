@@ -77,4 +77,29 @@ describe("Trie", () => {
 
 	})
 	
+	it("arr argument: Should accept an array of keys as arguments", () => {
+
+		t = createTrie(["app", "apple", "applet", "apples"])
+		expect(t).toBeDefined()
+		expect(t.size).toBe(4)
+
+	})
+
+	it("has: Returns true if the key is present", () => {
+
+		expect(t.has("app")).toBe(true)
+
+	})
+
+	it("has: Returns false if the the key is not present, even if all characters are", () => {
+
+		expect(t.has("ap")).toBe(false)
+
+	})
+
+	it("has: Returns false if the the key is not present at all", () => {
+
+		expect(t.has("appp")).toBe(false)
+
+	})
 })

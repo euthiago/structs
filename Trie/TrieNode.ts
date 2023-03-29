@@ -2,7 +2,7 @@
 /**
  * A Trie node
  */
-type TrieNode = {
+export type TrieNode = {
 	/**
 	 * Maps a single character to a TrieNode
 	 * Also holds information about keys ending
@@ -10,7 +10,7 @@ type TrieNode = {
 	 */
 	keys: Map<string, TrieNode>,
 	isEndOfKey: boolean,
-	insert: (key:string) => TrieNode
+	insert: (key:string, isEndOfKey?:boolean) => TrieNode
 }
 
 /**

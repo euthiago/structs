@@ -238,6 +238,9 @@ const createTrie = (arr?:string[], options?:TrieOptions):Trie => {
 
 	}
 
+	/**
+	 * False if the Trie has no keys stored
+	 */
 	const isEmpty = () => size === 0
 
 	/**
@@ -264,10 +267,10 @@ const createTrie = (arr?:string[], options?:TrieOptions):Trie => {
 
 	}
 
-	const find = (prefix="", maxResults=10) => {
+	const find = (prefix="", maxResults=Number.POSITIVE_INFINITY ) => {
 
 		// user does not want any result
-		if(maxResults < 1) return []
+		if(maxResults < 1 || size === 0) return []
 
 		// starting from the root TrieNode
 		let node = root
@@ -292,7 +295,42 @@ const createTrie = (arr?:string[], options?:TrieOptions):Trie => {
 		// storing the ammout of results found for quick usage
 		let resultsFound = results.length
 
-		// __TODO__ I had to stop coding at this point for the moment
+		// the nodes we will explore next
+		let nextNodes = Array.from(node.keys)
+
+		// using a moving index instead of shifting the array
+		// perhaps in a future version we might use a 
+		// configurable different approach
+		let i = 0
+
+		// iterate until maxResults is reached or
+		// we run out of nodes to explore
+		while(i < nextNodes.length){
+
+			// by getting the next node we are effectively BFSing
+			const [key, node] = nextNodes[i]
+
+			// did we find a new word?
+			if(node.isEndOfKey){
+				// adding the word to our results
+				results.push(prefix+key)
+				// explicitly incrementing the counter
+				resultsFound++
+				// stopping "early" when maxResults is reached
+				if(resultsFound === maxResults) 
+					break
+			}
+
+			// if this node had children, make sure
+			// they are added to our list of nodes to explore
+			nextNodes = nextNodes.concat( Array.from(node.keys).map( ([childKey, childNode]) => 
+				[key+childKey, childNode] 
+			))
+
+			// explicitly increasing i
+			i++
+
+		}
 
 		return results
 	}

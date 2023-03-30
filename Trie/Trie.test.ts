@@ -77,6 +77,13 @@ describe("Trie", () => {
 
 	})
 	
+	it("find: searching any prefix in our empty Trie returns an empty list", () => {
+
+		const results = t.find("ap")
+		expect(results).toEqual([])
+
+	})
+	
 	it("arr argument: Should accept an array of keys as arguments", () => {
 
 		t = createTrie(["app", "apple", "applet", "apples"])
@@ -102,4 +109,27 @@ describe("Trie", () => {
 		expect(t.has("appp")).toBe(false)
 
 	})
+
+
+	it("find: Finds all results for a certain prefix", () => {
+
+		const results = t.find("ap")
+		expect(results).toEqual(["app", "apple", "applet", "apples"])
+
+	})
+
+	it("find: Finds a limited ammount of results for a certain prefix", () => {
+
+		const results = t.find("ap", 2)
+		expect(results).toEqual(["app", "apple"])
+
+	})
+
+	it("find: negative values for maxResults yeild an empty list", () => {
+
+		const results = t.find("ap", -1)
+		expect(results).toEqual([])
+
+	})
+	
 })

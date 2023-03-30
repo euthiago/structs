@@ -1,5 +1,5 @@
 import Le from "../Comparators/Le"
-import createHeap, { Heap, HeapOptions } from "./Heap"
+import heap, { Heap, HeapOptions } from "./Heap"
 
 export type MinHeap<T> = Heap<T>
 export type MinHeapOptions<T> =  Omit<HeapOptions<T>, "comparator">
@@ -11,7 +11,7 @@ export type MinHeapOptions<T> =  Omit<HeapOptions<T>, "comparator">
  * Equivalent to Heap using Le comparator
  * @param {Array<T>} arr initial values to populate our Heap
  */
-const createMinHeap = <T>(arr?:Array<T>, options?:MinHeapOptions<T> ):Heap<T> => 
-	createHeap(arr, {comparator:Le, ...options})
+const minHeap = <T>(arr?:Array<T>, options?:MinHeapOptions<T> ):Heap<T> => 
+	heap(arr, {comparator:Le, ...options})
 
-export default createMinHeap
+export default minHeap

@@ -1,4 +1,4 @@
-import createTrieNode, { TrieNode } from "./TrieNode"
+import trieNode, { TrieNode } from "./TrieNode"
 
 /*
 
@@ -48,7 +48,7 @@ export type TrieOptions = {
  * Creats a Trie
  * @param arr optional list of keys to populate the Trie
  */
-const createTrie = (arr?:string[], options?:TrieOptions):Trie => {
+const trie = (arr?:string[], options?:TrieOptions):Trie => {
 
 	
 	const { immutable = false } = options || {}
@@ -56,7 +56,7 @@ const createTrie = (arr?:string[], options?:TrieOptions):Trie => {
 	// lazy inititialization
 	let instance: Trie | undefined
 	let size = 0
-	const root = createTrieNode()
+	const root = trieNode()
 
 	/**
 	 * Iterates through the key characters
@@ -368,4 +368,4 @@ const createTrie = (arr?:string[], options?:TrieOptions):Trie => {
 
 }
 
-export default createTrie
+export default trie

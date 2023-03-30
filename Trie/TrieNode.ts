@@ -16,7 +16,7 @@ export type TrieNode = {
 /**
  * Creates a TrieNode
  */
-const createTrieNode = (isEndOfKey:boolean=false):TrieNode => {
+const trieNode = (isEndOfKey:boolean=false):TrieNode => {
 
 	const keys = new Map<string, TrieNode>()
 	let instance:TrieNode
@@ -37,7 +37,7 @@ const createTrieNode = (isEndOfKey:boolean=false):TrieNode => {
 		}else{
 
 			// a new key is being inserted, creates a new node
-			node = createTrieNode(isEndOfKey)
+			node = trieNode(isEndOfKey)
 			keys.set(key, node)
 
 		}
@@ -58,4 +58,4 @@ const createTrieNode = (isEndOfKey:boolean=false):TrieNode => {
 
 }
 
-export default createTrieNode
+export default trieNode

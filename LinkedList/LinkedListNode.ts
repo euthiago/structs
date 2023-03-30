@@ -2,7 +2,7 @@
 /**
  * A LinkedList Node
  */
-type LinkedListNode<T> = {
+export type LinkedListNode<T> = {
 	/**
 	 * The value this current node is holding
 	 */
@@ -18,8 +18,8 @@ type LinkedListNode<T> = {
  * @param val Value the LinkedListNode will hold
  * @param next The next LinkedListNode in our LinkedList
  */
-const LinkedListNode = <T>(val?:T, next?:LinkedListNode<T>):LinkedListNode<T> => ({
+const linkedListNode = <T>(val?:T, next?:LinkedListNode<T>):LinkedListNode<T> => ({
 	val, next
 })
 
-export default LinkedListNode
+export default linkedListNode

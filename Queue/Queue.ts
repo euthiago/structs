@@ -36,7 +36,7 @@ export type Queue<T> = {
  * A First In First Out data structure
  * @param arr optional list of elements to populate the Queue
  */
-const createQueue = <T>(arr?:T[]):Queue<T> => {
+const queue = <T>(arr?:T[]):Queue<T> => {
 
 	// support for array initialization
 	const data 	= arr ? arr.slice() : Array<T>()
@@ -88,6 +88,6 @@ const createQueue = <T>(arr?:T[]):Queue<T> => {
  * @param arr The input array
  * @returns {Queue} a new Queue
  */
-export const fromArray = <T>(arr?:T[]):Queue<T> => createQueue(arr)
+export const fromArray = <T>(arr?:T[]):Queue<T> => queue(arr)
 
-export default createQueue
+export default queue

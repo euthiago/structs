@@ -72,7 +72,7 @@ export type HeapOptions<T> = {
 	comparator?: Comparator<T>,
 	/**
 	 * Internal props become immutable
-	 * EX: const h = createHeap<number>()	// h.size === 0
+	 * EX: const h = heap<number>()	// h.size === 0
 	 * const i = h.add(1) // h.size === 0 && i.size === 1
 	 * 
 	 */
@@ -95,7 +95,7 @@ export type HeapOptions<T> = {
  * @param {Array<T>} arr initial values to populate our Heap
  * @param {Comparator<T>} comparator By default Less Then or Equals is used. Making this a MinHeap
  */
-const createHeap = <T>(arr?:Array<T>, options?:HeapOptions<T> ):Heap<T> => {
+const heap = <T>(arr?:Array<T>, options?:HeapOptions<T> ):Heap<T> => {
 
 	const { comparator=Le, immutable=false } = options || {}
 
@@ -330,4 +330,4 @@ const createHeap = <T>(arr?:Array<T>, options?:HeapOptions<T> ):Heap<T> => {
 }
 
 
-export default createHeap
+export default heap

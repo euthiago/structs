@@ -1,8 +1,8 @@
-import createQueue, { fromArray, Queue } from "./Queue"
+import queue, { fromArray, Queue } from "./Queue"
 
 describe("Linked List", () => {
 
-	let q:Queue<number> = createQueue()
+	let q:Queue<number> = queue()
 		
 	it("Should produce a Queue", () => {
 
@@ -87,7 +87,7 @@ describe("Linked List", () => {
 	it("Creates a list from an Array", () => {
 
 		let arr = [1,2,3]
-		let q = createQueue(arr)
+		let q = queue(arr)
 		expect(q.size()).toBe(3)
 		expect(q.front()).toBe(1)
 		expect(q.rear()).toBe(3)

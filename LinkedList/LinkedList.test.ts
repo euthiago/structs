@@ -1,12 +1,12 @@
 import { Comparator } from "../Comparators/Comparator"
-import createLinkedList, { LinkedList } from "./LinkedList"
+import linkedList, { LinkedList } from "./LinkedList"
 
 describe("Linked List", () => {
 
 	let ll:LinkedList<number> 
 	it("Should produce a LinkedList", () => {
 
-		ll = createLinkedList<number>()
+		ll = linkedList<number>()
 		expect(ll).toBeDefined()
 		expect(ll.head).not.toBeDefined()
 		expect(ll.tail).not.toBeDefined()
@@ -186,7 +186,7 @@ describe("Linked List", () => {
 
 	it("Chaining example", () => {
 
-		const ll2 = createLinkedList<number>()
+		const ll2 = linkedList<number>()
 			.add(1)
 			.add(2)
 			.add(3)
@@ -201,7 +201,7 @@ describe("Linked List", () => {
 
 	it("Immutability example", () => {
 
-		const immut_ll = createLinkedList<number>({ immutable: true })
+		const immut_ll = linkedList<number>({ immutable: true })
 		const new_immut_ll = immut_ll.add(1)
 		expect(immut_ll.head).not.toBeDefined()
 		expect(immut_ll.tail).not.toBeDefined()

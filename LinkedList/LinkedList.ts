@@ -1,6 +1,6 @@
 import { Comparator } from "../Comparators/Comparator"
 import Eq from "../Comparators/Eq"
-import LinkedListNode from "./LinkedListNode"
+import linkedListNode, { LinkedListNode } from "./LinkedListNode"
 
 /**
  * A LinkedList 
@@ -79,7 +79,7 @@ export type LinkedListOptions = {
  * This makes this structure useful for simple First In First Out (FIFO)
  * applications, such as simple Queue-like usages.
  */
-const createLinkedList = <T>(options?:LinkedListOptions):LinkedList<T> => {
+const linkedList = <T>(options?:LinkedListOptions):LinkedList<T> => {
 
 	// default values
 	const { immutable=false } = options || {}
@@ -90,7 +90,7 @@ const createLinkedList = <T>(options?:LinkedListOptions):LinkedList<T> => {
 
 	const add = (val?:T):LinkedList<T> => {
 		
-		let node = LinkedListNode(val)
+		let node = linkedListNode(val)
 		if(!head){
 			head = node
 			tail = node
@@ -109,7 +109,7 @@ const createLinkedList = <T>(options?:LinkedListOptions):LinkedList<T> => {
 
 		// using a dummy head, so head becomes
 		// just another node
-		let dummy 	= LinkedListNode(undefined, head)
+		let dummy 	= linkedListNode(undefined, head)
 		let prev 	= dummy 
 		let cur 	= dummy.next
 		while(ammount > 0 && cur){
@@ -186,4 +186,4 @@ const createLinkedList = <T>(options?:LinkedListOptions):LinkedList<T> => {
 	return returnLinkedList()
 }
 
-export default createLinkedList
+export default linkedList

@@ -1,11 +1,11 @@
-import createTrie, { Trie } from "./Trie"
+import trie, { Trie } from "./Trie"
 
 describe("Trie", () => {
 
 	let t:Trie
-	it("createTrie: Should create a Trie", () => {
+	it("trie: Should create a Trie", () => {
 
-		t = createTrie()
+		t = trie()
 		expect(t).toBeDefined()
 		expect(t.size).toBe(0)
 		expect(t.isEmpty()).toBe(true)
@@ -86,7 +86,7 @@ describe("Trie", () => {
 	
 	it("arr argument: Should accept an array of keys as arguments", () => {
 
-		t = createTrie(["app", "apple", "applet", "apples"])
+		t = trie(["app", "apple", "applet", "apples"])
 		expect(t).toBeDefined()
 		expect(t.size).toBe(4)
 
@@ -125,7 +125,7 @@ describe("Trie", () => {
 
 	})
 
-	it("find: negative values for maxResults yeild an empty list", () => {
+	it("find: negative values for maxResults yield an empty list", () => {
 
 		const results = t.find("ap", -1)
 		expect(results).toEqual([])

@@ -1,11 +1,11 @@
-import createHeap, { Heap } from "./Heap"
+import heap, { Heap } from "./Heap"
 
 describe("Heap", () => {
 
 	let h:Heap<number>
 	it("Creates a Heap", () => {
 
-		h = createHeap()
+		h = heap()
 		expect(h.size).toBe(0)
 		expect(h.add).toBeInstanceOf(Function)
 
@@ -53,7 +53,7 @@ describe("Heap", () => {
 	})
 
 	it("A new Heap can be created from an unsorted array", () => {
-		h = createHeap([10,5,2,3,11,4,20])
+		h = heap([10,5,2,3,11,4,20])
 		expect(h.size).toBe(7)
 		expect(h.peek(0)).toBe(2)
 		expect(h.peek(1)).toBe(3)
@@ -65,7 +65,7 @@ describe("Heap", () => {
 	})
 	
 	it("A new Heap can be created from an unsorted array (2)", () => {
-		h = createHeap([0, 100, 50, 25, 10, 200, 12, 11, 10, 1000, 2000, 10, 10, ])
+		h = heap([0, 100, 50, 25, 10, 200, 12, 11, 10, 1000, 2000, 10, 10, ])
 		expect(h.size).toBe(13)
 		expect(h.peek(0)).toBe(0)
 		expect(h.peek(1)).toBe(10)
@@ -84,7 +84,7 @@ describe("Heap", () => {
 	
 
 	it("toArray: Returns the Heap as an Array", () => {
-		h = createHeap([0, 100, 50, 25, 10, 200, 12, 11, 10, 1000, 2000, 10, 10, ])
+		h = heap([0, 100, 50, 25, 10, 200, 12, 11, 10, 1000, 2000, 10, 10, ])
 		let expected = [
 			0,   10,   10,  11,
 		   10,   10,   12, 100,
@@ -113,7 +113,7 @@ describe("Heap", () => {
 			Nevertheless its a neat trick and we can keep it for now
 		*/
 		let expected = [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 ]
-		let h = createHeap([...expected].reverse())
+		let h = heap([...expected].reverse())
 		expect(h.size).toBe(expected.length);
 		expect(h.toSortedArray()).toEqual(expected);
 		
@@ -127,7 +127,7 @@ describe("Heap", () => {
 			Nevertheless its a neat trick and we can keep it for now
 		*/
 		let expected = [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 ]
-		const h = createHeap<number>([ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 ], { immutable:true })
+		const h = heap<number>([ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 ], { immutable:true })
 		const i = h.add(100)
 		expect(h.size).toBe(expected.length);
 		expect(i.size).toEqual(h.size+1);

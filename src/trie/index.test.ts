@@ -150,4 +150,10 @@ describe("Trie", () => {
 
 	})
 	
+	it("root: Root TrieNode is acessible", () => {
+
+		expect(t.root).toBeDefined()
+		expect(t.root.keys.size).toBe(1)
+
+	})
 })

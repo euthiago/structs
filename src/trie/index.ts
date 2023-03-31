@@ -1,4 +1,4 @@
-import trieNode, { TrieNode } from "./TrieNode"
+import trieNode, { TrieNode } from "./trieNode"
 
 /**
  * A prefix tree
@@ -31,6 +31,14 @@ export type Trie = {
 	 * @param {number} maxResults returns at max this ammount of keys
 	 */
 	find: (prefix:string, maxResults?:number) => string[],
+	/**
+	 * The root TrieNode for this Trie
+	 * Acessing this internal structure
+	 * is particularly useful for efficient
+	 * traversal algorithms that keep track
+	 * of the visited nodes
+	 */
+	root:TrieNode,
 
 }
 
@@ -372,12 +380,15 @@ const trie = (arr?:string[], options?:TrieOptions):Trie => {
 				insert,
 				remove,
 				has,
-				find
+				find,
+				root
 			}
 			return instance
 		}
 
 		instance.size = size
+		instance.root = root
+		
 		return instance
 
 	}

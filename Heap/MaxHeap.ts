@@ -1,5 +1,5 @@
 import Ge from "../Comparators/Ge"
-import heap, { Heap, HeapOptions } from "./Heap"
+import heap, { Heap, HeapOptions } from "."
 
 export type MaxHeap<T> = Heap<T>
 export type MaxHeapOptions<T> =  Omit<HeapOptions<T>, "comparator">

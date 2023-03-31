@@ -1,5 +1,5 @@
 import { Comparator } from "../Comparators/Comparator"
-import linkedList, { LinkedList } from "./LinkedList"
+import linkedList, { LinkedList } from "."
 
 describe("Linked List", () => {
 

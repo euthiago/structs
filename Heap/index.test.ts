@@ -1,4 +1,4 @@
-import heap, { Heap } from "./Heap"
+import heap, { Heap } from "."
 
 describe("Heap", () => {
 

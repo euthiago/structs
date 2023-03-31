@@ -81,13 +81,4 @@ const queue = <T>(arr?:T[]):Queue<T> => {
 
 }
 
-/**
- * Created a Queue from an Array
- * First element of the Array will
- * be the first element of the Queue
- * @param arr The input array
- * @returns {Queue} a new Queue
- */
-export const fromArray = <T>(arr?:T[]):Queue<T> => queue(arr)
-
 export default queue

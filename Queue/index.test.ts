@@ -1,4 +1,4 @@
-import queue, { fromArray, Queue } from "./Queue"
+import queue, { Queue } from "."
 
 describe("Linked List", () => {
 
@@ -88,16 +88,6 @@ describe("Linked List", () => {
 
 		let arr = [1,2,3]
 		let q = queue(arr)
-		expect(q.size()).toBe(3)
-		expect(q.front()).toBe(1)
-		expect(q.rear()).toBe(3)
-		
-	})
-
-	it("Creates a list from the helper builder", () => {
-
-		let arr = [1,2,3]
-		let q = fromArray(arr)
 		expect(q.size()).toBe(3)
 		expect(q.front()).toBe(1)
 		expect(q.rear()).toBe(3)

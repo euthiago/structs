@@ -1,6 +1,6 @@
 import { Comparator } from "../Comparators/Comparator"
 import Eq from "../Comparators/Eq"
-import linkedListNode, { LinkedListNode } from "./LinkedListNode"
+import linkedListNode, { LinkedListNode } from "./linkedListNode"
 
 /**
  * A LinkedList 

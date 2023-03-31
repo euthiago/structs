@@ -1,5 +1,5 @@
 import Le from "../Comparators/Le"
-import heap, { Heap, HeapOptions } from "./Heap"
+import heap, { Heap, HeapOptions } from "."
 
 export type MinHeap<T> = Heap<T>
 export type MinHeapOptions<T> =  Omit<HeapOptions<T>, "comparator">

@@ -1,11 +1,5 @@
 import trieNode, { TrieNode } from "./TrieNode"
 
-/*
-
-	__TODO__ 
-		- case sensitiviness
-*/
-
 /**
  * A prefix tree
  */

@@ -1,4 +1,4 @@
-import { Comparator } from "../comparators/comparator"
+import { Comparator } from "../sharedTypes/comparator"
 import linkedList, { LinkedList } from "."
 
 describe("Linked List", () => {

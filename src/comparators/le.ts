@@ -1,4 +1,4 @@
-import { Comparator } from "./comparator"
+import { Comparator } from "../sharedTypes/comparator"
 
 /**
  * Uses Javascripts less than or equals operator (<)

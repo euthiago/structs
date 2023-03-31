@@ -1,4 +1,4 @@
-import { Comparator } from "./comparator"
+import { Comparator } from "../sharedTypes/comparator"
 
 /**
  * Creates a Comparator that checks for

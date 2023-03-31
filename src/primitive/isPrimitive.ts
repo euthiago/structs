@@ -1,4 +1,4 @@
-import { Primitive } from "../SharedTypes/Primitive"
+import { Primitive } from "../sharedTypes/primitive"
 
 /**
  * Guard that checks if something is Primitive

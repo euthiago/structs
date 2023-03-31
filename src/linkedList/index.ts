@@ -1,4 +1,4 @@
-import { Comparator } from "../comparators/comparator"
+import { Comparator } from "../sharedTypes/comparator"
 import eq from "../comparators/eq"
 import linkedListNode, { LinkedListNode } from "./linkedListNode"
 

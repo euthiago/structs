@@ -1,4 +1,4 @@
-import { Comparator } from "./Comparator"
+import { Comparator } from "./comparator"
 
 /**
  * Uses Javascripts strict equality (===) 
@@ -7,7 +7,7 @@ import { Comparator } from "./Comparator"
  * @param rhs right hand side element that will be compared for equality
  * @returns {boolean}
  */
-const Eq:Comparator<any> = (lhs:any, rhs:any):boolean =>  
+const eq:Comparator<any> = (lhs:any, rhs:any):boolean =>  
 	lhs === rhs
 
-export default Eq
+export default eq

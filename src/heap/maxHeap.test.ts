@@ -1,4 +1,4 @@
-import maxHeap, { MaxHeap } from "./MaxHeap"
+import maxHeap, { MaxHeap } from "./maxHeap"
 
 describe("MaxHeap", () => {
 

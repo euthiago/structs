@@ -1,4 +1,4 @@
-import { Comparator } from "./Comparator"
+import { Comparator } from "./comparator"
 
 /**
  * Uses Javascripts less than or equals operator (<)
@@ -8,7 +8,7 @@ import { Comparator } from "./Comparator"
  * @param rhs right hand side element that will be compared
  * @returns {boolean}
  */
-const Le:Comparator<any> = (lhs:any, rhs:any):boolean =>  
+const le:Comparator<any> = (lhs:any, rhs:any):boolean =>  
 	lhs <= rhs
 
-export default Le
+export default le

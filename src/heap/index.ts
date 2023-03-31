@@ -1,5 +1,5 @@
-import { Comparator } from "../Comparators/Comparator"
-import Le from "../Comparators/Le"
+import { Comparator } from "../comparators/comparator"
+import le from "../comparators/le"
 
 
 export type Heap<T> = {
@@ -97,7 +97,7 @@ export type HeapOptions<T> = {
  */
 const heap = <T>(arr?:Array<T>, options?:HeapOptions<T> ):Heap<T> => {
 
-	const { comparator=Le, immutable=false } = options || {}
+	const { comparator=le, immutable=false } = options || {}
 
 	// initialize with a copy of an array or a new array of T
 	// IMPORTANT: non empty arrays will trigger a heapifyDown

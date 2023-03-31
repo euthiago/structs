@@ -1,5 +1,5 @@
-import { Comparator } from "../Comparators/Comparator"
-import Eq from "../Comparators/Eq"
+import { Comparator } from "../comparators/comparator"
+import eq from "../comparators/eq"
 import linkedListNode, { LinkedListNode } from "./linkedListNode"
 
 /**
@@ -102,7 +102,7 @@ const linkedList = <T>(options?:LinkedListOptions):LinkedList<T> => {
 	
 	}
 
-	const removeMany = (val?:T, ammount:number=1, comparator:Comparator<T>=Eq):LinkedList<T> => {
+	const removeMany = (val?:T, ammount:number=1, comparator:Comparator<T>=eq):LinkedList<T> => {
 
 		// no nodes to remove
 		if(!head || ammount < 1) return returnLinkedList()

@@ -1,4 +1,4 @@
-import minHeap, { MinHeap } from "./MinHeap"
+import minHeap, { MinHeap } from "./minHeap"
 
 describe("MinHeap", () => {
 

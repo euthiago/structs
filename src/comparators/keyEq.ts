@@ -1,4 +1,4 @@
-import { Comparator } from "./Comparator"
+import { Comparator } from "./comparator"
 
 /**
  * Creates a Comparator that checks for
@@ -10,9 +10,9 @@ import { Comparator } from "./Comparator"
  * @param b right hand side element that will be compared for equality
  * @returns {boolean}
  */
-type Key = number | string
+type Key = keyof Object
 type OptObject = Object | undefined
-const KeyEq:Comparator<Object> = (a:OptObject, b:OptObject, key:Key):boolean =>  
+const keyEq:Comparator<Object> = (a:OptObject, b:OptObject, key:Key):boolean =>  
 	( a !== undefined && b !== undefined ) && a[key] === b[key]
 
-export default KeyEq
+export default keyEq

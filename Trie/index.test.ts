@@ -1,4 +1,4 @@
-import trie, { Trie } from "./Trie"
+import trie, { Trie } from "."
 
 describe("Trie", () => {
 
@@ -129,6 +129,24 @@ describe("Trie", () => {
 
 		const results = t.find("ap", -1)
 		expect(results).toEqual([])
+
+	})
+	
+	it("caseInsensitive: creates a caseInsensitive Trie", () => {
+
+		t = trie(["aPp", "Apple", "APPLET", "appLES"], { caseInsensitive:true })
+		expect(t).toBeDefined()
+		expect(t.size).toBe(4)
+		expect(t.isEmpty()).toBe(false)
+
+	})
+	
+	it("find: finds just fine on a caseInsensitive Trie", () => {
+
+		const results = t.find("ap")
+		const results2 = t.find("AP")
+		expect(results.length).toBe(4)
+		expect(results2.length).toBe(4)
 
 	})
 	

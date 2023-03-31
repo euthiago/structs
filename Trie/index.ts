@@ -41,7 +41,8 @@ export type Trie = {
 }
 
 export type TrieOptions = {
-	immutable?:boolean
+	immutable?:boolean,
+	caseInsensitive?:boolean
 }
 
 /**
@@ -51,7 +52,10 @@ export type TrieOptions = {
 const trie = (arr?:string[], options?:TrieOptions):Trie => {
 
 	
-	const { immutable = false } = options || {}
+	const { 
+		immutable = false,
+		caseInsensitive = false
+	} = options || {}
 
 	// lazy inititialization
 	let instance: Trie | undefined
@@ -67,6 +71,14 @@ const trie = (arr?:string[], options?:TrieOptions):Trie => {
 	 * @param key 
 	 */
 	const insert = (key:string) => {
+
+		// no length early return guard
+		if( key.length === 0 ) 
+			return returnTrie()
+
+		// case insensitive support
+		if(caseInsensitive)
+			key = key.toLocaleLowerCase()
 
 		let node = root
 		for(let i=0; i<key.length; i++) {
@@ -152,8 +164,13 @@ const trie = (arr?:string[], options?:TrieOptions):Trie => {
 	 */
 	const remove = (key:string) => {
 
+		// no length early return guard
 		if( key.length === 0 ) 
 			return returnTrie()
+
+		// case insensitive support
+		if(caseInsensitive)
+			key = key.toLocaleLowerCase()
 
 		let notToBeRemoved:TrieNode|undefined
 		let charKeyToBeRemoved:string|undefined
@@ -254,6 +271,14 @@ const trie = (arr?:string[], options?:TrieOptions):Trie => {
 	 */
 	const has = (key:string) => {
 
+		// no length early return guard
+		if( key.length === 0 ) 
+			return false
+
+		// case insensitive support
+		if(caseInsensitive)
+			key = key.toLocaleLowerCase()
+
 		let node = root
 		for( const c of key ) {
 			if(!node.keys.has(c))
@@ -268,6 +293,14 @@ const trie = (arr?:string[], options?:TrieOptions):Trie => {
 	}
 
 	const find = (prefix="", maxResults=Number.POSITIVE_INFINITY ) => {
+
+		// no length early return guard
+		if( prefix.length === 0 ) 
+			return []
+
+		// case insensitive support
+		if(caseInsensitive)
+			prefix = prefix.toLocaleLowerCase()
 
 		// user does not want any result
 		if(maxResults < 1 || size === 0) return []
